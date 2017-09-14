@@ -25,11 +25,11 @@ or
 
 `gradlew npmInstall`
 
-### build
+### Either 1) build
 
 `gradlew rebuild`
 
-### build with a minified codebase
+### Or 2) build with a minified codebase
 
 `gradlew rebuildMin`
 
