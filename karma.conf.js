@@ -3,7 +3,8 @@ let path = require('path');
 module.exports = function(config) {
     var appBase    = 'src/';       // transpiled app JS and map files
     var appAssets  = '/base/app/'; // component assets fetched by Angular's compiler
-  
+    var testDir = 'coverage';
+
     // Testing helpers (optional) are conventionally in a folder called `testing`
     var testingBase    = 'src/testing/'; // transpiled test JS and map files
     var testingSrcBase = 'src/testing/'; // test source TS files
@@ -17,7 +18,7 @@ module.exports = function(config) {
       },
       reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
       coverageReporter: {
-        dir: path.join('coverage', 'coverage_js', '/'),
+        dir: path.join(testDir, 'coverage_js', '/'),
         reporters: [
           { type: 'json', subdir: '.', file: 'coverage-final.json' },
           { type: 'html', subdir: '.' }
@@ -25,7 +26,7 @@ module.exports = function(config) {
       },
       remapIstanbulReporter: {
         reports: {
-          html: path.join('testing', 'coverage_ts', '/')
+          html: path.join(testDir, 'coverage_ts', '/')
         }
       },
     
