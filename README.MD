@@ -33,15 +33,15 @@ or
 
 `gradlew rebuildMin`
 
-### run locally
+### start the local server
 
-`gradlew start`
+`node server`
 
 When you run locally, you have to build first.  Yeah.  I don't like running the server on the source files.  If we're going to serve the code, it should be on the code in its distributable form.  I don't see how it's a reliable test, otherwise.
 
 #### check it out in the browser
 
-after you run start, go to http://localhost:4453/index.html .  You should see 'Hello World!' appear in the browser.
+after you start the server, go to http://localhost:4453/index.html .  You should see 'Hello World!' appear in the browser.
 
 ### run tests
 
