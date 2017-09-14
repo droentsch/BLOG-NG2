@@ -18,10 +18,7 @@ const DEST = {
             ROOT: './dist',
             PROD: './dist/prod'
         };
-const COVERAGE = {
-    TS: './coverage',
-    JS: './coverage_js'
-};
+const COVERAGE = './coverage';
 const TARGET = DEST.PROD; //default
 const APP = `${DEST.ROOT}/app`;
 const DEST_JS = path.join(TARGET, 'js');
@@ -83,9 +80,12 @@ gulp.task('cleanup', () => {
 });
 
 gulp.task('dev.cleanup', (done: any) => {
-    return cleanup([SOURCE.JS, SOURCE.MAP, COVERAGE.JS, COVERAGE.TS]);    
+    return cleanup([SOURCE.JS]);    
 });
 
+gulp.task('delete.coverage', (done: any) => {
+    return cleanup([COVERAGE]);    
+});
 
 gulp.task('bundle.js', () => {
     return lib.bundler(false, APP);
@@ -96,7 +96,7 @@ gulp.task('bundle.js.min', () => {
 });
 
 gulp.task('karma.jasmine', (done: any) => {
-    KarmaServer.start({
+    return KarmaServer.start({
         configFile: path.join(__dirname,'karma.conf.js')
     }, () => {
         done();
@@ -128,5 +128,5 @@ gulp.task('prodMin', () => {
     runSequence('cleanup', 'lint', 'build', 'bundle.js.min', 'copy.assets');
 });
 gulp.task('test', () => {
-    runSequence('dev.cleanup', 'dev.build', 'copy.assets', 'karma.jasmine');    
+    runSequence('delete.coverage','dev.build', 'karma.jasmine', 'dev.cleanup');    
 });

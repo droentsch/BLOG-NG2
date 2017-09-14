@@ -9,6 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 export class HelloWorldComponent  {
     public user: string;
     constructor() {
-        this.user = "World";
+        this.user = 'World';
     }
 }

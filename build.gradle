@@ -26,15 +26,11 @@ if (project.hasProperty('tag')) {
 def version = { tag -> "--tag=${tag}" }
 
 task rebuild(type: NpmTask) {
-    args = ['run', 'rebuild', '--', version(t) ]
+    args = ['run', 'build', '--', version(t) ]
 }
 
 task rebuildMin(type: NpmTask) {
-    args = ['run', 'rebuildMin']
-}
-
-task start(type: NpmTask) {
-    args = ['run', 'server']
+    args = ['run', 'build:minified', '--', version(t) ]
 }
 
 task lint(type: NpmTask) {

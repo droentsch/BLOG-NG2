@@ -46,7 +46,7 @@ describe('The app.component', () => {
       TestBed
         .compileComponents()
         .then(() => {
-          let fixture = TestBed.createComponent(AppComponent);
+          fixture = TestBed.createComponent(AppComponent);
           let compiled = fixture.nativeElement;
 
           expect(compiled).toBeTruthy();
