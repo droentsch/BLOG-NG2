@@ -1,4 +1,4 @@
-# This is a very simple angular2+ seed project
+# This is a very simple angular 4.x seed project
 ## set up
 ### clone this repository
 ### rename it to your project, and reset the git origin
