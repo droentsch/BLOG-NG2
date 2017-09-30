@@ -1,0 +1,6 @@
+node_modules
+dist/
+coverage
+.gradle/
+*.log
+src/app/*.js
