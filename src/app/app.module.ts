@@ -4,14 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { HelloWorldComponent } from './helloworld/hello-world.component';
-import { HelloWorldModule } from './helloworld/hello-world.module';
 import { AppComponent } from './app.component';
 import 'rxjs/Rx'
 
 const APP_ROUTES: Routes = [
-    { path: 'hw', component: HelloWorldComponent },
-    { path: '', redirectTo: '/hw', pathMatch: 'full' }
+    { path: '/', component: HomeComponent },
+    { path: '', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -20,11 +18,11 @@ const APP_ROUTES: Routes = [
         FormsModule,
         RouterModule.forRoot(APP_ROUTES),
         HttpModule,
-        HelloWorldModule,
+        HomeModule,
     ],
     declarations: [
         AppComponent,
-        HelloWorldComponent
+        HomeComponent
     ],
     bootstrap: [AppComponent],
     providers: [
