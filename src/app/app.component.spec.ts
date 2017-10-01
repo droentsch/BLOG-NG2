@@ -12,12 +12,13 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HomeComponent } from './home/home.component';
 import 'rxjs/Rx'
 
 describe('The app.component', () => {
 
   const APP_ROUTES: Routes = [
-    { path: 'hw', component: HelloWorldComponent }
+    { path: 'home', component: HomeComponent }
   ];
   let comp: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
@@ -32,7 +33,7 @@ describe('The app.component', () => {
       ],
       declarations: [
         AppComponent,
-        HelloWorldComponent,
+        HomeComponent,
       ],
       providers: [
         { provide: APP_BASE_HREF, useValue: '/' }
