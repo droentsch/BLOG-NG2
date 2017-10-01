@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { HomeModule } from './home/home.module';
 import 'rxjs/Rx'
 
 const APP_ROUTES: Routes = [
-    { path: '/', component: HomeComponent },
-    { path: '', redirectTo: '/', pathMatch: 'full' }
+    { path: 'home', component: HomeComponent },
+    { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -3,10 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    templateUrl: 'hello-world.component.html',
-    styleUrls: ['hello-world.component.css'],
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.css'],
 })
-export class HelloWorldComponent  {
+export class HomeComponent  {
     public user: string;
     constructor() {
         this.user = 'World';
