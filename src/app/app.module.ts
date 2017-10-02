@@ -20,11 +20,10 @@ const APP_ROUTES: Routes = [
         FormsModule,
         RouterModule.forRoot(APP_ROUTES),
         HttpModule,
-        HomeModule,
+        HomeModule
     ],
     declarations: [
-        AppComponent,
-        HomeComponent
+        AppComponent
     ],
     bootstrap: [AppComponent],
     providers: [
