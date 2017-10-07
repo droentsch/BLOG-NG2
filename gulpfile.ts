@@ -15,9 +15,10 @@ let KarmaServer = require('karma').Server;
 let tsProject = ts.createProject('./src/tsconfig.json');
 let lib = new TaskLib();
 const DEST = {
-            ROOT: './dist',
-            PROD: './dist/prod'
-        };
+    ROOT: './dist',
+    PROD: './dist/prod',
+    CONTENT: './dist/prod/content'
+};
 const COVERAGE = './coverage';
 const TARGET = DEST.PROD; //default
 const APP = `${DEST.ROOT}/app`;
@@ -28,7 +29,8 @@ const SOURCE = {
     ROOT: './src/app',
     TS: `./src/app/**/*.ts`,
     JS: `./src/app/**/*.js`,
-    MAP: `./src/app/**/*.js.map`
+    MAP: `./src/app/**/*.js.map`,
+    CONTENT: './src/content/**/*'
 }
 const LIB = `${DEST}/app/node_modules`;
 const PROD_CODE_FILE = 'app.js';
@@ -39,16 +41,16 @@ const SYS_CONFIG = 'systemjs.config.js';
 const NODE_DIR = 'node_modules';
 const ROOT = '/';
 const ASSETS = {
-        SRC: './assets/**/*'
+    SRC: './assets/**/*'
 }
-let cleanup = function(targets: string[]) {
+let cleanup = function (targets: string[]) {
     return del(targets)
-    .then((paths) => {
+        .then((paths) => {
             console.log(`Deleted files/folders:\n${paths.join('\n')}`);
-    })
-    .catch((reason) => {
-        console.log(`Error deleting targets: ${reason}`)
-    });    
+        })
+        .catch((reason) => {
+            console.log(`Error deleting targets: ${reason}`)
+        });
 };
 
 gulp.task('copy.assets', (done) => {
@@ -60,10 +62,12 @@ gulp.task('copy.assets', (done) => {
         .pipe(gulp.dest(DEST_JS));
     gulp.src(ASSETS.SRC)
         .pipe(gulp.dest(TARGET));
+    gulp.src(SOURCE.CONTENT)
+        .pipe(gulp.dest(DEST.CONTENT));
     done();
 });
 
-gulp.task ('lint', () => {
+gulp.task('lint', () => {
     return gulp.src(SOURCE.TS)
         .pipe(tslint({
             configuration: LINT_CONFIG,
@@ -80,11 +84,11 @@ gulp.task('cleanup', () => {
 });
 
 gulp.task('dev.cleanup', (done: any) => {
-    return cleanup([SOURCE.JS]);    
+    return cleanup([SOURCE.JS]);
 });
 
 gulp.task('delete.coverage', (done: any) => {
-    return cleanup([COVERAGE]);    
+    return cleanup([COVERAGE]);
 });
 
 gulp.task('bundle.js', () => {
@@ -97,7 +101,7 @@ gulp.task('bundle.js.min', () => {
 
 gulp.task('karma.jasmine', (done: any) => {
     return KarmaServer.start({
-        configFile: path.join(__dirname,'karma.conf.js')
+        configFile: path.join(__dirname, 'karma.conf.js')
     }, () => {
         done();
     });
@@ -108,17 +112,17 @@ gulp.task('dev.build', () => {
         .pipe(maps.init())
         .pipe(inline({ base: SOURCE, useRelativePaths: true }))
         .pipe(tsProject()).js
-        .pipe(maps.write({sourceRoot: '.'}))
+        .pipe(maps.write({ sourceRoot: '.' }))
         .pipe(gulp.dest('.'));
 });
 
 gulp.task('build', () => {
     return gulp.src(SOURCE.TS)
-    .pipe(maps.init())
-    .pipe(inline({ base: SOURCE, useRelativePaths: true }))
-    .pipe(tsProject()).js
-    .pipe(maps.write())
-    .pipe(gulp.dest(APP));
+        .pipe(maps.init())
+        .pipe(inline({ base: SOURCE, useRelativePaths: true }))
+        .pipe(tsProject()).js
+        .pipe(maps.write())
+        .pipe(gulp.dest(APP));
 });
 
 gulp.task('prod', () => {
@@ -128,5 +132,5 @@ gulp.task('prodMin', () => {
     runSequence('cleanup', 'lint', 'build', 'bundle.js.min', 'copy.assets');
 });
 gulp.task('test', () => {
-    runSequence('delete.coverage','dev.build', 'karma.jasmine', 'dev.cleanup');    
+    runSequence('delete.coverage', 'dev.build', 'karma.jasmine', 'dev.cleanup');
 });
