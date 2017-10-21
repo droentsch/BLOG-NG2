@@ -10,7 +10,11 @@ export class ConfigService {
         this.http = http;
     }
 
-    public getJSON(extract: ()=>void, handleError: ()=>void ): Observable<IConfig> {
-        return 
+    public getConfig() {
+        
+    }
+    private getJSON(url: string, extract: (data: any)=>void, handleError: ()=>void ): Observable<any> {
+        return this.http.get(url)
+            .map((data: any) => extract(data));
     }
 }
