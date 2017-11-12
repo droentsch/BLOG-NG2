@@ -6,9 +6,14 @@ import { ActivatedRoute } from '@angular/router';
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.css'],
 })
-export class HomeComponent  {
+export class HomeComponent implements OnInit {
     public user: string;
     constructor() {
         this.user = 'World';
+    }
+
+    public ngOnInit(): void {
+        getBlogConfig();
+        loadInitialContents();
     }
 }
