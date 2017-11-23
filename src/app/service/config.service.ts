@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { IBlogConfig } from '../model/IBlogConfig';
+
+const CONFIG_URL = '/config/config.json';
 
 @Injectable()
 export class ConfigService {
@@ -10,11 +13,14 @@ export class ConfigService {
         this.http = http;
     }
 
-    public getConfig() {
-        
+    private getConfig(): Observable<(res: Response) => IBlogConfig | {}> {
+        return this.http.get(CONFIG_URL)
+            .map(data => this.extractData);
     }
-    private getJSON(url: string, extract: (data: any)=>void, handleError: ()=>void ): Observable<any> {
-        return this.http.get(url)
-            .map((data: any) => extract(data));
+
+    private extractData(res: Response): IBlogConfig | {} {
+        let body = res.json || {};
+        return body;
     }
+
 }

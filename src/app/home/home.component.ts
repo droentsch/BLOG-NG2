@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ConfigService } from '../service/config.service';
 
 @Component({
     moduleId: module.id,
@@ -7,13 +8,21 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['home.component.css'],
 })
 export class HomeComponent implements OnInit {
-    public user: string;
-    constructor() {
-        this.user = 'World';
+    private config: ConfigService;
+
+    constructor(config: ConfigService) {
+        this.config = config;
     }
 
     public ngOnInit(): void {
-        getBlogConfig();
-        loadInitialContents();
+        this.getBlogConfig();
+        this.loadInitialContents();
+    }
+    private getBlogConfig(): void {
+        this.config.getBlogConfig()
+    }
+
+    public loadInitialContents(): void {
+
     }
 }
