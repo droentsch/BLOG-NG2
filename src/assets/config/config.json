@@ -1,3 +1,4 @@
 {
-    "blogTitle": "Dan's blog"
+    "blogTitle": "Dan's blog",
+    "chapters" : ["C1"]
 }

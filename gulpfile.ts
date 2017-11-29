@@ -1,3 +1,5 @@
+// TODO: GET THE GULPFILE FROM LMS UI
+
 import * as gulp from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as runSequence from 'run-sequence';

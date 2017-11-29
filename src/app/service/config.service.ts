@@ -13,7 +13,7 @@ export class ConfigService {
         this.http = http;
     }
 
-    private getConfig(): Observable<(res: Response) => IBlogConfig | {}> {
+    public getConfig(): Observable<(res: Response) => IBlogConfig | {}> {
         return this.http.get(CONFIG_URL)
             .map(data => this.extractData);
     }
