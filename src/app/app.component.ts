@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
             .subscribe((data) => this.handleConfig,
             (error) => this.handleConfigError);
     }
-    
+
     private handleConfig(data: IBlogConfig): void {
         this.title.setTitle(data.blogTitle);
         // TODO: SAVE THE REST OF CONFIG TO STATE
