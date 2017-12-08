@@ -18,6 +18,8 @@ export class ConfigService {
             .map(data => this.extractData);
     }
 
+    public getBlogConfig() {}
+
     private extractData(res: Response): IBlogConfig | {} {
         let body = res.json || {};
         return body;

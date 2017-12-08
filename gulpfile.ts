@@ -73,7 +73,7 @@ gulp.task('lint', () => {
     return gulp.src(SOURCE.TS)
         .pipe(tslint({
             configuration: LINT_CONFIG,
-            formatter: "prose"
+            formatter: 'prose'
         }))
         .pipe(tslint.report({
             emitError: false,
