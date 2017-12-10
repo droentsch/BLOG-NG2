@@ -1,5 +1,3 @@
-// TODO: GET THE GULPFILE FROM LMS UI
-
 import * as gulp from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as runSequence from 'run-sequence';
@@ -8,6 +6,8 @@ import * as concat from 'gulp-concat';
 import * as replace from 'gulp-replace';
 import * as del from 'del';
 import * as path from 'path';
+import * as inject from 'gulp-inject';
+import * as gutil from 'gulp-util';
 import tslint from 'gulp-tslint';
 import TaskLib from './gulp.class.tasklib';
 let inline = require('gulp-inline-ng2-template');
@@ -19,10 +19,12 @@ let lib = new TaskLib();
 const DEST = {
     ROOT: './dist',
     PROD: './dist/prod',
-    CONTENT: './dist/prod/content'
+    APP: './dist/prod/app',
+    ASSETS: './dist/prod/assets',
+    CSS: './dist/prod/css'
 };
 const COVERAGE = './coverage';
-const TARGET = DEST.PROD; //default
+const TARGET = DEST.PROD; // default
 const APP = `${DEST.ROOT}/app`;
 const DEST_JS = path.join(TARGET, 'js');
 const LINT_CONFIG = 'tslint.json';
@@ -30,21 +32,30 @@ const LINT_CONFIG = 'tslint.json';
 const SOURCE = {
     ROOT: './src/app',
     TS: `./src/app/**/*.ts`,
+    TESTING: './src/testing/**/*.ts',
     JS: `./src/app/**/*.js`,
     MAP: `./src/app/**/*.js.map`,
-    CONTENT: './src/content/**/*'
+    CSS: './src/css'
 }
 const LIB = `${DEST}/app/node_modules`;
 const PROD_CODE_FILE = 'app.js';
-const INDEX = 'index.html';
-const CACHE_REPLACER = /v11111v/g;
+const INDEX = './src/index.html';
 const VERSION_REPLACER = /tag11111tag/g;
 const SYS_CONFIG = 'systemjs.config.js';
 const NODE_DIR = 'node_modules';
 const ROOT = '/';
 const ASSETS = {
-    SRC: './assets/**/*'
+    SRC: './src/assets/**/*'
 }
+let getCssTag = function (filename: string) {
+    let fullFile = path.join('css', filename);
+    return `<link href="${fullFile}" rel="stylesheet" type="text/css" />`;
+}
+let getJsTag = function (filename: string): string {
+    let fullFile = path.join( 'js', filename);
+    return `<script src="${fullFile}"></script>`;
+}
+
 let cleanup = function (targets: string[]) {
     return del(targets)
         .then((paths) => {
@@ -55,18 +66,50 @@ let cleanup = function (targets: string[]) {
         });
 };
 
-gulp.task('copy.assets', (done) => {
-    gulp.src(INDEX)
-        .pipe(replace(CACHE_REPLACER, new Date().getTime().toString()))
-        .pipe(replace(VERSION_REPLACER, lib.getTag()))
-        .pipe(gulp.dest(TARGET));
+gulp.task('copy.assets', () => {
     gulp.src(lib.LIB)
         .pipe(gulp.dest(DEST_JS));
-    gulp.src(ASSETS.SRC)
+    gulp.src([path.join(SOURCE.CSS, 'bootstrap.min.css'), path.join(SOURCE.CSS, 'foundation.css'), path.join(SOURCE.CSS, 'app.css')])
+        .pipe(concat('main.css'))
+        .pipe(gulp.dest(DEST.CSS));
+    return gulp.src(ASSETS.SRC)
+        .pipe(gulp.dest(DEST.ASSETS));
+});
+
+//  THIS TASK IS MADNESS.  We're copying images to where, early in their understanding of Angular,
+//     the widget developers thought they needed to be copied.
+//     Until we refactor that code, we have to reproduce the multi-layered directories in which these icons/images live. --DR
+gulp.task('copy.widget.images', () => {
+    return gulp.src(path.join(SOURCE.ROOT, '**/*.png'), { base: SOURCE.ROOT })
+        .pipe(gulp.dest(DEST.APP));
+});
+
+gulp.task('copy.index', () => {
+    let appjs = path.join(DEST_JS, 'app.js');
+    return gulp.src(INDEX)
+        .pipe(inject(gulp.src(appjs, { read: false }), {
+            starttag: '<!-- inject:app:{{ext}} -->',
+            transform: function (filepath, file) {
+                return  getJsTag(file.basename);
+            }
+        }))
+        .pipe(inject(gulp.src([path.join(DEST_JS, '*.js'), `!${appjs}`], { read: false }), {
+            transform: function (filepath, file) {
+                return  getJsTag(file.basename);
+            }
+        }))
+        .pipe(inject(gulp.src([path.join(DEST.CSS, '*.css')], { read: false }), {
+            transform: function (filepath, file) {
+                return lib.transformInjectedFilePath(filepath, getCssTag);
+            }
+        }))
+        .pipe(replace(VERSION_REPLACER, lib.getTag()))
         .pipe(gulp.dest(TARGET));
-    gulp.src(SOURCE.CONTENT)
-        .pipe(gulp.dest(DEST.CONTENT));
-    done();
+});
+
+gulp.task('copy.local', () => {
+    return gulp.src(['./dist/prod/**/*'])
+        .pipe(gulp.dest(path.join(DEST.ROOT, lib.getBase())));
 });
 
 gulp.task('lint', () => {
@@ -101,7 +144,7 @@ gulp.task('bundle.js.min', () => {
     return lib.bundler(true, APP);
 });
 
-gulp.task('karma.jasmine', (done: any) => {
+gulp.task('karma.jasmine', (done: () => void) => {
     return KarmaServer.start({
         configFile: path.join(__dirname, 'karma.conf.js')
     }, () => {
@@ -110,7 +153,7 @@ gulp.task('karma.jasmine', (done: any) => {
 });
 
 gulp.task('dev.build', () => {
-    return gulp.src(SOURCE.TS, { base: '.' })
+    return gulp.src([SOURCE.TS, SOURCE.TESTING], { base: '.' })
         .pipe(maps.init())
         .pipe(inline({ base: SOURCE, useRelativePaths: true }))
         .pipe(tsProject()).js
@@ -127,11 +170,14 @@ gulp.task('build', () => {
         .pipe(gulp.dest(APP));
 });
 
-gulp.task('prod', () => {
-    runSequence('cleanup', 'lint', 'build', 'bundle.js', 'copy.assets');
+gulp.task('prod', (done) => {
+    runSequence('cleanup', 'lint', 'build', 'bundle.js', 'copy.assets', 'copy.index', done);
+});
+gulp.task('prodLocal', () => {
+    runSequence('prod', 'copy.local');
 });
 gulp.task('prodMin', () => {
-    runSequence('cleanup', 'lint', 'build', 'bundle.js.min', 'copy.assets');
+    runSequence('cleanup', 'lint', 'build', 'bundle.js.min', 'copy.assets', 'copy.index');
 });
 gulp.task('test', () => {
     runSequence('delete.coverage', 'dev.build', 'karma.jasmine', 'dev.cleanup');
