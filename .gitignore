@@ -4,3 +4,4 @@ coverage
 .gradle/
 *.log
 src/app/*.js
+.vscode/

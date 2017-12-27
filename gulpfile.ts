@@ -49,6 +49,7 @@ const ASSETS = {
 }
 let getCssTag = function (filename: string) {
     let fullFile = path.join('css', filename);
+    // console.info(`css fullFile:${fullFile}`);
     return `<link href="${fullFile}" rel="stylesheet" type="text/css" />`;
 }
 let getJsTag = function (filename: string): string {
@@ -67,52 +68,56 @@ let cleanup = function (targets: string[]) {
 };
 
 gulp.task('copy.assets', () => {
-    gulp.src(lib.LIB)
-        .pipe(gulp.dest(DEST_JS));
-    gulp.src([path.join(SOURCE.CSS, 'bootstrap.min.css'), path.join(SOURCE.CSS, 'foundation.css'), path.join(SOURCE.CSS, 'app.css')])
-        .pipe(concat('main.css'))
-        .pipe(gulp.dest(DEST.CSS));
     return gulp.src(ASSETS.SRC)
         .pipe(gulp.dest(DEST.ASSETS));
 });
 
-//  THIS TASK IS MADNESS.  We're copying images to where, early in their understanding of Angular,
-//     the widget developers thought they needed to be copied.
-//     Until we refactor that code, we have to reproduce the multi-layered directories in which these icons/images live. --DR
-gulp.task('copy.widget.images', () => {
-    return gulp.src(path.join(SOURCE.ROOT, '**/*.png'), { base: SOURCE.ROOT })
-        .pipe(gulp.dest(DEST.APP));
+gulp.task('copy.js', () => {
+    return gulp.src(lib.LIB)
+    .pipe(gulp.dest(DEST_JS));
+});
+
+gulp.task('copy.css', () => {
+   return gulp.src([path.join(SOURCE.CSS, 'bootstrap.min.css'), path.join(SOURCE.CSS, 'foundation.css'), path.join(SOURCE.CSS, 'app.css')])
+    .pipe(concat('main.css'))
+    .pipe(gulp.dest(DEST.CSS));
 });
 
 gulp.task('copy.index', () => {
     let appjs = path.join(DEST_JS, 'app.js');
+    console.info(`appjs: ${appjs}`);
     return gulp.src(INDEX)
         .pipe(inject(gulp.src(appjs, { read: false }), {
             starttag: '<!-- inject:app:{{ext}} -->',
-            transform: function (filepath, file) {
-                return  getJsTag(file.basename);
-            }
+            relative: true,
+            // transform: function (filepath, file) {
+            //     console.info(`transform js1 filepath: ${filepath}`);
+            //     console.info(`transform js1 file.path: ${file.path}`);
+            //     console.info(`transform js1 file.basename: ${file.basename}`);
+            //     return  getJsTag(file.basename);
+            // }
         }))
-        .pipe(inject(gulp.src([path.join(DEST_JS, '*.js'), `!${appjs}`], { read: false }), {
-            transform: function (filepath, file) {
-                return  getJsTag(file.basename);
-            }
-        }))
-        .pipe(inject(gulp.src([path.join(DEST.CSS, '*.css')], { read: false }), {
-            transform: function (filepath, file) {
-                return lib.transformInjectedFilePath(filepath, getCssTag);
-            }
-        }))
-        .pipe(replace(VERSION_REPLACER, lib.getTag()))
+        // .pipe(inject(gulp.src([path.join(DEST_JS, '*.js'), `!${appjs}`], { read: false }), {
+        //     transform: function (filepath, file) {
+        //         return  getJsTag(file.basename);
+        //     }
+        // }))
+        // .pipe(inject(gulp.src([path.join(DEST.CSS, '*.css')], { read: false }), {
+        //     transform: function (filepath, file) {
+        //         return  getCssTag(file.basename);
+        //     }
+        // }))
+        // .pipe(replace(VERSION_REPLACER, lib.getTag()))
         .pipe(gulp.dest(TARGET));
 });
 
-gulp.task('copy.local', () => {
-    return gulp.src(['./dist/prod/**/*'])
-        .pipe(gulp.dest(path.join(DEST.ROOT, lib.getBase())));
-});
-
 gulp.task('lint', () => {
+    gulp.task('prodLocal', () => {
+        runSequence('prod', 'copy.local');
+    });
+    gulp.task('prodMin', () => {
+        runSequence('cleanup', 'lint', 'build', 'bundle.js.min', 'copy.assets', 'copy.index');
+    });
     return gulp.src(SOURCE.TS)
         .pipe(tslint({
             configuration: LINT_CONFIG,
@@ -171,13 +176,7 @@ gulp.task('build', () => {
 });
 
 gulp.task('prod', (done) => {
-    runSequence('cleanup', 'lint', 'build', 'bundle.js', 'copy.assets', 'copy.index', done);
-});
-gulp.task('prodLocal', () => {
-    runSequence('prod', 'copy.local');
-});
-gulp.task('prodMin', () => {
-    runSequence('cleanup', 'lint', 'build', 'bundle.js.min', 'copy.assets', 'copy.index');
+    runSequence('cleanup', 'lint', 'build', 'bundle.js', 'copy.js', 'copy.css', 'copy.assets', 'copy.index', done);
 });
 gulp.task('test', () => {
     runSequence('delete.coverage', 'dev.build', 'karma.jasmine', 'dev.cleanup');
