@@ -85,14 +85,10 @@ gulp.task('copy.css', () => {
 
 gulp.task('copy.index', () => {
     let appjs = path.join(DEST_JS, 'app.js');
-    console.info(`appjs: ${appjs}`);
     return gulp.src(INDEX)
         .pipe(inject(gulp.src(appjs, { read: false }), {
             starttag: '<!-- inject:app:{{ext}} -->',
             transform: function (filepath, file) {
-                console.info(`transform js1 filepath: ${filepath}`);
-                console.info(`transform js1 file.path: ${file.path}`);
-                console.info(`transform js1 path.basename(file.path): ${path.basename(file.path)}`);
                 return  getJsTag(path.basename(file.path));
             }
         }))

@@ -23,12 +23,14 @@ export class AppComponent implements OnInit {
     public ngOnInit() {
         // TODO: CREATE A LOADER COMPONENT
         this.config.getConfig()
-            .subscribe((data) => this.handleConfig,
+            .subscribe((data: IBlogConfig | {}) => this.handleConfig(data),
             (error) => this.handleConfigError);
     }
 
-    private handleConfig(data: IBlogConfig): void {
-        this.title.setTitle(data.blogTitle);
+    private handleConfig(data: any): void {
+        if (this.isBlogConfig(data)) {
+            this.title.setTitle(data.blogTitle);
+        }
         // TODO: SAVE THE REST OF CONFIG TO STATE
     }
 
@@ -36,4 +38,9 @@ export class AppComponent implements OnInit {
         // TODO: MAKE A VISIBLE ERROR HANDLER
         console.error(error);
     }
+
+    private isBlogConfig(arg: any) {
+        return (arg.blogTitle !== undefined);
+    }
+
 }

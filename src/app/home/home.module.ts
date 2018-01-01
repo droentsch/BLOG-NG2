@@ -8,9 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { BodyComponent } from './body/body.component';
 import { HttpModule } from '@angular/http';
 
-
 import 'rxjs/Rx'
-
 
 @NgModule({
     imports: [
