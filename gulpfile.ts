@@ -89,25 +89,24 @@ gulp.task('copy.index', () => {
     return gulp.src(INDEX)
         .pipe(inject(gulp.src(appjs, { read: false }), {
             starttag: '<!-- inject:app:{{ext}} -->',
-            relative: true,
-            // transform: function (filepath, file) {
-            //     console.info(`transform js1 filepath: ${filepath}`);
-            //     console.info(`transform js1 file.path: ${file.path}`);
-            //     console.info(`transform js1 file.basename: ${file.basename}`);
-            //     return  getJsTag(file.basename);
-            // }
+            transform: function (filepath, file) {
+                console.info(`transform js1 filepath: ${filepath}`);
+                console.info(`transform js1 file.path: ${file.path}`);
+                console.info(`transform js1 path.basename(file.path): ${path.basename(file.path)}`);
+                return  getJsTag(path.basename(file.path));
+            }
         }))
-        // .pipe(inject(gulp.src([path.join(DEST_JS, '*.js'), `!${appjs}`], { read: false }), {
-        //     transform: function (filepath, file) {
-        //         return  getJsTag(file.basename);
-        //     }
-        // }))
-        // .pipe(inject(gulp.src([path.join(DEST.CSS, '*.css')], { read: false }), {
-        //     transform: function (filepath, file) {
-        //         return  getCssTag(file.basename);
-        //     }
-        // }))
-        // .pipe(replace(VERSION_REPLACER, lib.getTag()))
+        .pipe(inject(gulp.src([path.join(DEST_JS, '*.js'), `!${appjs}`], { read: false }), {
+            transform: function (filepath, file) {
+                return  getJsTag(path.basename(file.path));
+            }
+        }))
+        .pipe(inject(gulp.src([path.join(DEST.CSS, '*.css')], { read: false }), {
+            transform: function (filepath, file) {
+                return  getCssTag(path.basename(file.path));
+            }
+        }))
+        .pipe(replace(VERSION_REPLACER, lib.getTag()))
         .pipe(gulp.dest(TARGET));
 });
 
