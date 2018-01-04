@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -9,21 +9,15 @@ const CONFIG_URL = '/assets/config/config.json';
 
 @Injectable()
 export class ConfigService {
-    private http: Http;
-    constructor(http: Http) {
+    private http: HttpClient;
+    constructor(http: HttpClient) {
         this.http = http;
     }
 
-    public getConfig(): Observable<any> {
-        return this.http.get(CONFIG_URL)
-            .map(this.extractData);
+    public getConfig(): Observable<IBlogConfig> {
+        return this.http.get<IBlogConfig>(CONFIG_URL);
     }
 
     public getBlogConfig() {};
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
-    }
 
 }

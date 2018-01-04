@@ -3,7 +3,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
@@ -20,7 +20,7 @@ const APP_ROUTES: Routes = [
         BrowserModule,
         FormsModule,
         RouterModule.forRoot(APP_ROUTES),
-        HttpModule,
+        HttpClientModule,
         HomeModule
     ],
     declarations: [
