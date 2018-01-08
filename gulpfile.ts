@@ -35,7 +35,7 @@ const SOURCE = {
     TESTING: './src/testing/**/*.ts',
     JS: `./src/app/**/*.js`,
     MAP: `./src/app/**/*.js.map`,
-    CSS: './src/css'
+    CSS: './src/assets/css'
 }
 const LIB = `${DEST}/app/node_modules`;
 const PROD_CODE_FILE = 'app.js';
@@ -78,8 +78,8 @@ gulp.task('copy.js', () => {
 });
 
 gulp.task('copy.css', () => {
-   return gulp.src([path.join(SOURCE.CSS, 'bootstrap.min.css'), path.join(SOURCE.CSS, 'foundation.css'), path.join(SOURCE.CSS, 'app.css')])
-    .pipe(concat('main.css'))
+   return gulp.src([path.join(SOURCE.CSS, 'bootstrap.min.css'), path.join(SOURCE.CSS, 'blog.css'), path.join(SOURCE.CSS, 'app.css')])
+    .pipe(concat('site.css'))
     .pipe(gulp.dest(DEST.CSS));
 });
 

@@ -4,4 +4,14 @@ import { IBlogConfig } from '../model/IBlogConfig';
 
 
 @Injectable()
-export class StateService {}
+export class StateService {
+    private _blogConfig: IBlogConfig;
+
+    public set blogConfig(config: IBlogConfig) {
+        this._blogConfig = config;
+    }
+
+    public get blogConfig(): IBlogConfig {
+        return this._blogConfig;
+    }
+}

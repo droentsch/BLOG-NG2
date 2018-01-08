@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
 import 'rxjs/Rx'
 import { ConfigService } from './service/config.service';
+import { StateService } from './service/state.service';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
@@ -29,7 +30,8 @@ const APP_ROUTES: Routes = [
     bootstrap: [AppComponent],
     providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-        ConfigService
+        ConfigService,
+        StateService,
   ]
 })
 export class AppModule { }

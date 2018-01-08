@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ConfigService } from './service/config.service';
+import { StateService } from './service/state.service';
 import { IBlogConfig } from './model/IBlogConfig';
 
 @Component({
@@ -14,24 +15,24 @@ import { IBlogConfig } from './model/IBlogConfig';
 export class AppComponent implements OnInit {
     public title: Title;
     private config: ConfigService;
+    private state: StateService;
 
-    constructor(title: Title, config: ConfigService) {
+    constructor(title: Title, config: ConfigService, state: StateService ) {
         this.title = title;
         this.config = config;
+        this.state = state;
     }
 
     public ngOnInit() {
         // TODO: CREATE A LOADER COMPONENT
         this.config.getConfig()
-            .subscribe((data: IBlogConfig | {}) => this.handleConfig(data),
+            .subscribe((data: IBlogConfig) => this.handleConfig(data),
             (error) => this.handleConfigError);
     }
 
-    private handleConfig(data: any): void {
-        if (this.isBlogConfig(data)) {
-            this.title.setTitle(data.blogTitle);
-        }
-        // TODO: SAVE THE REST OF CONFIG TO STATE
+    private handleConfig(data: IBlogConfig): void {
+        this.title.setTitle(data.blogTitle);
+        this.state.blogConfig = data;
     }
 
     private handleConfigError(error: string): void {
@@ -39,8 +40,5 @@ export class AppComponent implements OnInit {
         console.error(error);
     }
 
-    private isBlogConfig(arg: any) {
-        return (arg.blogTitle !== undefined);
-    }
 
 }
