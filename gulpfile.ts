@@ -1,3 +1,5 @@
+// TODO: ADD COPY CONFIG AND CONTENT TASKS AND ADD TO PROD BUILD
+
 import * as gulp from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as runSequence from 'run-sequence';
@@ -21,7 +23,10 @@ const DEST = {
     PROD: './dist/prod',
     APP: './dist/prod/app',
     ASSETS: './dist/prod/assets',
-    CSS: './dist/prod/css'
+    CSS: './dist/prod/assets/css',
+    IMG: './dist/prod/assets/img',
+    CONTENT: './dist/prod/assets/content',
+    CONFIG: './dist/prod/assets/config'
 };
 const COVERAGE = './coverage';
 const TARGET = DEST.PROD; // default
@@ -35,7 +40,10 @@ const SOURCE = {
     TESTING: './src/testing/**/*.ts',
     JS: `./src/app/**/*.js`,
     MAP: `./src/app/**/*.js.map`,
-    CSS: './src/assets/css'
+    CSS: './src/assets/css',
+    IMG: './src/assets/img',
+    CONTENT: './src/assets/content',
+    CONFIG: './src/assets/config'
 }
 const LIB = `${DEST}/app/node_modules`;
 const PROD_CODE_FILE = 'app.js';
@@ -44,12 +52,8 @@ const VERSION_REPLACER = /tag11111tag/g;
 const SYS_CONFIG = 'systemjs.config.js';
 const NODE_DIR = 'node_modules';
 const ROOT = '/';
-const ASSETS = {
-    SRC: './src/assets/**/*'
-}
 let getCssTag = function (filename: string) {
-    let fullFile = path.join('css', filename);
-    // console.info(`css fullFile:${fullFile}`);
+    let fullFile = path.join('assets/css', filename);
     return `<link href="${fullFile}" rel="stylesheet" type="text/css" />`;
 }
 let getJsTag = function (filename: string): string {
@@ -67,14 +71,14 @@ let cleanup = function (targets: string[]) {
         });
 };
 
-gulp.task('copy.assets', () => {
-    return gulp.src(ASSETS.SRC)
-        .pipe(gulp.dest(DEST.ASSETS));
-});
-
 gulp.task('copy.js', () => {
     return gulp.src(lib.LIB)
     .pipe(gulp.dest(DEST_JS));
+});
+
+gulp.task('copy.img', () => {
+    return gulp.src(SOURCE.IMG)
+    .pipe(gulp.dest(DEST.IMG));
 });
 
 gulp.task('copy.css', () => {
@@ -171,7 +175,7 @@ gulp.task('build', () => {
 });
 
 gulp.task('prod', (done) => {
-    runSequence('cleanup', 'lint', 'build', 'bundle.js', 'copy.js', 'copy.css', 'copy.assets', 'copy.index', done);
+    runSequence('cleanup', 'lint', 'build', 'bundle.js', 'copy.js', 'copy.css', 'copy.img', 'copy.index', done);
 });
 gulp.task('test', () => {
     runSequence('delete.coverage', 'dev.build', 'karma.jasmine', 'dev.cleanup');
