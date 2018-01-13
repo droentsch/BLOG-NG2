@@ -1,5 +1,3 @@
-// TODO: ADD COPY CONFIG AND CONTENT TASKS AND ADD TO PROD BUILD
-
 import * as gulp from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as runSequence from 'run-sequence';
