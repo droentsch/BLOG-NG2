@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { IBlogConfig } from '../model/IBlogConfig';
 
-const CONFIG_URL = '/assets/config/config.json';
+const CONFIG_URL = '/config/config.json';
 
 @Injectable()
 export class ConfigService {

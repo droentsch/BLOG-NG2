@@ -25,8 +25,8 @@ const DEST = {
     ASSETS: './dist/prod/assets',
     CSS: './dist/prod/assets/css',
     IMG: './dist/prod/assets/img',
-    CONTENT: './dist/prod/assets/content',
-    CONFIG: './dist/prod/assets/config'
+    CONTENT: './dist/prod/content',
+    CONFIG: './dist/prod/config'
 };
 const COVERAGE = './coverage';
 const TARGET = DEST.PROD; // default
@@ -41,9 +41,9 @@ const SOURCE = {
     JS: `./src/app/**/*.js`,
     MAP: `./src/app/**/*.js.map`,
     CSS: './src/assets/css',
-    IMG: './src/assets/img',
-    CONTENT: './src/assets/content',
-    CONFIG: './src/assets/config'
+    IMG: './src/assets/img/**/*',
+    CONTENT: './src/assets/content/**/*',
+    CONFIG: './src/assets/config/**/*'
 }
 const LIB = `${DEST}/app/node_modules`;
 const PROD_CODE_FILE = 'app.js';
@@ -86,6 +86,16 @@ gulp.task('copy.css', () => {
     .pipe(concat('site.css'))
     .pipe(gulp.dest(DEST.CSS));
 });
+
+gulp.task('copy.config', () => {
+    return gulp.src(SOURCE.CONFIG)
+     .pipe(gulp.dest(DEST.CONFIG));
+ });
+
+ gulp.task('copy.content', () => {
+    return gulp.src(SOURCE.CONTENT)
+     .pipe(gulp.dest(DEST.CONTENT));
+ });
 
 gulp.task('copy.index', () => {
     let appjs = path.join(DEST_JS, 'app.js');
@@ -175,7 +185,9 @@ gulp.task('build', () => {
 });
 
 gulp.task('prod', (done) => {
-    runSequence('cleanup', 'lint', 'build', 'bundle.js', 'copy.js', 'copy.css', 'copy.img', 'copy.index', done);
+    runSequence('cleanup', 'lint', 'build', 'bundle.js',
+                'copy.js', 'copy.css', 'copy.img', 'copy.config',
+                'copy.content', 'copy.index', done);
 });
 gulp.task('test', () => {
     runSequence('delete.coverage', 'dev.build', 'karma.jasmine', 'dev.cleanup');
