@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { IBlogConfig } from '../model/IBlogConfig';
+import { IChapter } from '../model/IChapter';
 
 const CONFIG_URL = '/config/config.json';
 
@@ -18,6 +19,8 @@ export class ConfigService {
         return this.http.get<IBlogConfig>(CONFIG_URL);
     }
 
-    public getBlogConfig() {};
-
+    public getBlogConfig(data: string) {
+        let contentUrl = `/content/${data}/${data}.json`;
+        return this.http.get<IChapter>(contentUrl);
+    };
 }

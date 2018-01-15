@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { BroadcastService } from './service/broadcast.service';
 import { ConfigService } from './service/config.service';
 import { StateService } from './service/state.service';
 import { IBlogConfig } from './model/IBlogConfig';
@@ -16,11 +17,13 @@ export class AppComponent implements OnInit {
     public title: Title;
     private config: ConfigService;
     private state: StateService;
+    private broadcast: BroadcastService;
 
-    constructor(title: Title, config: ConfigService, state: StateService ) {
+    constructor(title: Title, config: ConfigService, state: StateService, broadcast: BroadcastService ) {
         this.title = title;
         this.config = config;
         this.state = state;
+        this.broadcast = broadcast;
     }
 
     public ngOnInit() {
@@ -33,6 +36,7 @@ export class AppComponent implements OnInit {
     private handleConfig(data: IBlogConfig): void {
         this.title.setTitle(data.blogTitle);
         this.state.blogConfig = data;
+        this.broadcast.configData(data);
     }
 
     private handleConfigError(error: string): void {
