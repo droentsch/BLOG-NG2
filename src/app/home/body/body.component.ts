@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 import { ConfigService } from '../../service/config.service';
 @Component({
     inputs: ['content'],
@@ -6,7 +6,12 @@ import { ConfigService } from '../../service/config.service';
     templateUrl: './body.component.html',
 })
 export class BodyComponent  {
+    private content: string;
 
     constructor() {
+    }
+
+    public ngOnChanges() {
+        console.log(this.content);
     }
 }

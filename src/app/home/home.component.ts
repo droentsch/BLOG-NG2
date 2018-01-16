@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import { ConfigService } from '../service/config.service';
+import { ContentService } from '../service/content.service';
 import { BroadcastService } from '../service/broadcast.service';
 import { IBlogConfig } from '../model/IBlogConfig';
 import { IChapter } from '../model/IChapter';
@@ -12,9 +14,12 @@ import { IChapter } from '../model/IChapter';
 export class HomeComponent implements OnInit {
     private configService: ConfigService;
     private broadcast: BroadcastService;
+    private content: ContentService;
+    public initialContent: Observable<string>;
 
-    constructor(config: ConfigService, broadcast: BroadcastService) {
+    constructor(config: ConfigService, broadcast: BroadcastService, content: ContentService) {
         this.configService = config;
+        this.content = content;
         this.broadcast = broadcast;
     }
     public ngOnInit() {
@@ -33,6 +38,7 @@ export class HomeComponent implements OnInit {
     }
     private handleChapter(data: IChapter) {
         console.log(data);
+        this.initialContent = this.content.getChapter(data.contentToken);
     }
     private handleError(error: string) {
         console.log(`ERROR: ${error}`);

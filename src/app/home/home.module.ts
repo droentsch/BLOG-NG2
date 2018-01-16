@@ -9,6 +9,7 @@ import { BodyComponent } from './body/body.component';
 
 import 'rxjs/Rx'
 import { BroadcastService } from '../service/broadcast.service';
+import { ContentService } from '../service/content.service';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { BroadcastService } from '../service/broadcast.service';
     providers: [
         Title,
         BroadcastService,
+        ContentService,
     ]
 })
 export class HomeModule { }
