@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { HeaderComponent } from './header/header.component';
 import { BodyComponent } from './body/body.component';
+import { ContentDisplayComponent } from './content-display/content-display.component';
 
 import 'rxjs/Rx'
 import { BroadcastService } from '../service/broadcast.service';
@@ -20,7 +21,8 @@ import { ContentService } from '../service/content.service';
     declarations: [
         HomeComponent,
         HeaderComponent,
-        BodyComponent
+        BodyComponent,
+        ContentDisplayComponent,
     ],
     providers: [
         Title,
