@@ -4,3 +4,244 @@
     background-size: contain;
     background-color: #000000;
 }
+@font-face {
+    font-family: 'NewsCycleRegular';
+    src: url('fonts/news-cycle/NewsCycle-Regular-webfont.eot');
+    src: url('fonts/news-cycle/NewsCycle-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/news-cycle/NewsCycle-Regular-webfont.woff') format('woff'), url('../blog/styles/fonts/news-cycle/NewsCycle-Regular-webfont.ttf') format('truetype'), url('../blog/styles/fonts/news-cycle/NewsCycle-Regular-webfont.svg#NewsCycleRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'garamondregular';
+    src: url('fonts/garamond/ebgaramond-webfont.eot');
+    src: url('fonts/garamond/ebgaramond-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/garamond/ebgaramond-webfont.ttf') format('truetype'), url('fonts/garamond/ebgaramond-webfont.svg#eb_garamondregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.book {
+    background-image: url(../img/parchment.jpg);
+    font-family: garamondregular;
+    z-index: 100;
+    padding: 20px 20px 20px 40px;
+    overflow: visible;
+    min-height: 1600px;
+}
+hr {
+    display: block;
+    -webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0.5em;
+    -webkit-margin-start: auto;
+    -webkit-margin-end: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+.audio-credits
+{
+    min-height: 1em;
+    overflow:hidden;
+}
+.audio-credits .page
+{
+    width:100%;
+    min-height: 70em;
+    overflow:hidden;
+    background-image: url(../img/amsterdam.jpg);
+}
+.audio-credits .chapterMenu
+{
+    background-color: #000000;
+    min-height: 1em;
+    overflow: hidden;
+}
+.audio-credits .menuItem
+{
+    min-height:1em;
+    overflow:hidden;
+}
+.center {
+    text-align: center;
+}
+.top-sm
+{
+    padding-top: 12px;
+}
+.top-md
+{
+    padding-top: 24px;
+}
+.top-lg
+{
+    padding-top: 36px;
+}
+.top-xlg
+{
+    padding-top: 72px;
+}
+.brand-background {
+    background-color: #292F18;
+}
+
+.bottom-margin-md {
+    margin-bottom: 30px;
+}
+
+.body {
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 30px;
+    padding-top: 20px;
+    text-indent: 50px;
+    padding-right: 25px;
+}
+.badge{
+    font-size:1em;
+}
+
+.toc-body {
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 30px;
+    padding-top: 20px;
+    padding-right: 25px;
+    font-size: 24px;
+}
+
+.credit {
+    color: #ffac47;
+    padding-left: 30px;
+    font-size: 19px;
+}
+
+.link-emulate {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.top-margin-md {
+    margin-top: 30px;
+}
+
+.modal-body {
+    font-family: garamondregular;
+    font-size: 24px;
+}
+
+.top-margin-sm {
+    margin-top: 10px;
+}
+
+.white-text {
+    color: #ffffff;
+}
+
+.black-background {
+    background-color: #000;
+}
+
+.black-text {
+    color: #000;
+}
+
+.bold {
+    font-weight: 900;
+}
+
+.italic {
+    font-style: italic;
+}
+
+
+.chapterHead {
+    font-size: 40px;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 33px;
+}
+
+.chapterSubhead {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    font-style: italic;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.disclaimer-header {
+    font-family: Georgia;
+    font-size: 2.5em;
+    letter-spacing: 0.1em;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.disclaimer-body {
+    background-image: url(../img/spectre.png);
+    background-size: cover;
+    background-color: #000;
+    color: #fff;
+}
+
+.disclaimer-left-margin {
+    margin-left: 25px;
+}
+
+.nfuws-modal-backdrop {
+    height: 100%;
+}
+.bigImageContainer {
+    height: 720px;
+    width: 100%;
+    padding-left: 0px;
+    margin-left: 0px;
+    background-color: #000000;
+}
+
+#header {
+    height: 80px;
+    width: 100%;
+    padding-left: 0px;
+    margin-left: -8px;
+}
+
+.big {
+    font-weight: 900;
+    font-size: 50px;
+}
+.bigger {
+    font-weight: 900;
+    font-size: 75px;
+}
+.nfuws-caption {
+    color: rgb(247, 240, 214);
+    font-family: NewsCycleRegular;
+    font-size: 35px;
+}
+.headerItem, .headerItem a {
+    color: rgb(226, 93, 19);
+    float: left;
+    margin-right: 20px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.headerItem a {
+    text-decoration: none;
+}
+.heading {
+    background-color:  #000000;
+}
+.highlight {
+    color: rgb(226, 93, 19);
+    font-family: NewsCycleRegular;
+    font-size: 35px;
+}
+
+.nextDiv {
+    font-size: 2em;
+    margin-top: 3em;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+}
