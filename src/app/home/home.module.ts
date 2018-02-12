@@ -1,25 +1,33 @@
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { HttpModule } from '@angular/http';
-
+import { HeaderComponent } from './header/header.component';
+import { BodyComponent } from './body/body.component';
+import { ContentDisplayComponent } from './content-display/content-display.component';
 
 import 'rxjs/Rx'
-
+import { BroadcastService } from '../service/broadcast.service';
+import { ContentService } from '../service/content.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         RouterModule,
-        HttpModule
     ],
     declarations: [
+        HomeComponent,
+        HeaderComponent,
+        BodyComponent,
+        ContentDisplayComponent,
     ],
     providers: [
+        Title,
+        BroadcastService,
+        ContentService,
     ]
 })
 export class HomeModule { }

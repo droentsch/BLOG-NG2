@@ -3,11 +3,15 @@ import * as del from 'del';
 import * as yargs from 'yargs';
 
 
-export default class tasklib {
+export default class TaskLib {
     public LIB: Array<string>;
 
     constructor() {
-        this.LIB = ['node_modules/core-js/client/shim.min.js', 'node_modules/zone.js/dist/zone.js', 'node_modules/reflect-metadata/Reflect.js', 'node_modules/systemjs/dist/system.src.js'];
+        this.LIB = [
+        'node_modules/core-js/client/shim.min.js',
+        'node_modules/zone.js/dist/zone.js',
+        'node_modules/reflect-metadata/Reflect.js',
+        'node_modules/systemjs/dist/system.src.js'];
     }
     public bundler(isMinified: boolean, app: string) {
         let options = {
@@ -42,12 +46,12 @@ export default class tasklib {
         let minutes: number = rawDate.getMinutes();
         let seconds: number = rawDate.getSeconds();
         if (minutes < 10) {
-            minString = "0" + minutes;
+            minString = '0' + minutes;
         } else {
             minString = minutes.toString();
         }
-        if (seconds < 10){ 
-            secondString = "0" + seconds;
+        if (seconds < 10) {
+            secondString = '0' + seconds;
         } else {
             secondString = seconds.toString();
         }
