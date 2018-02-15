@@ -31,13 +31,13 @@ export class BodyComponent implements OnInit {
         const chapter = configData.chapters[0];
         this.configService.getBlogConfig(chapter)
             .subscribe((data: IChapter) => this.handleChapter(data),
-            (error) => this.handleError(error));
+            (error: string) => this.handleError(error));
     }
     private handleChapter(data: IChapter) {
         console.log(data);
         this.contentService.getChapter(data.contentToken)
             .subscribe((chap: string) => this.gimmeChapter(chap),
-            (error) => this.handleError(error));
+            (error: string) => this.handleError(error));
     }
     private gimmeChapter(chapter: string) {
         this.chapter = chapter;
