@@ -11,6 +11,8 @@ import { IBlogConfig } from '../../model/IBlogConfig';
 })
 export class HeaderComponent implements OnInit  {
     public title: string;
+    public byline: string;
+
     private broadcast: BroadcastService;
     constructor(broadcast: BroadcastService) {
         this.broadcast = broadcast;
@@ -27,6 +29,7 @@ export class HeaderComponent implements OnInit  {
     }
     private handleConfigData(data: IBlogConfig) {
         this.title = data.blogTitle;
+        this.byline = data.blogByline;
     }
     private handleConfigError(error: string) {
         // TODO: Show the user the error
