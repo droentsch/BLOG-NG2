@@ -6,6 +6,7 @@ import { ConfigService } from '../../service/config.service';
 import { ContentService } from '../../service/content.service';
 @Component({
     selector: 'blog-body',
+    styleUrls: ['body.component.css'],
     templateUrl: './body.component.html',
 })
 export class BodyComponent implements OnInit {
