@@ -12,6 +12,8 @@ import { IBlogConfig } from '../../model/IBlogConfig';
 export class HeaderComponent implements OnInit  {
     public title: string;
     public byline: string;
+    public firstTitleWord: string;
+    public titleRemainder: string;
 
     private broadcast: BroadcastService;
     constructor(broadcast: BroadcastService) {
@@ -28,7 +30,15 @@ export class HeaderComponent implements OnInit  {
                        (error: string) => this.handleConfigError(error));
     }
     private handleConfigData(data: IBlogConfig) {
-        this.title = data.blogTitle;
+        let first: string;
+        let rest: string;
+        if (data.EmphasizeFirstWord === true) {
+            ({ first, rest } = this.getFirstWordAndRemainder());
+            this.firstTitleWord = first;
+            this.titleRemainder = rest;
+        } else {
+            this.title = data.blogTitle;
+        }
         this.byline = data.blogByline;
     }
     private handleConfigError(error: string) {
