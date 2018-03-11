@@ -23,6 +23,7 @@ const DEST = {
     ASSETS: './dist/prod/assets',
     CSS: './dist/prod/assets/css',
     IMG: './dist/prod/assets/img',
+    FONT: './dist/prod/assets/css/fonts',
     CONTENT: './dist/prod/content',
     CONFIG: './dist/prod/config'
 };
@@ -40,6 +41,7 @@ const SOURCE = {
     MAP: `./src/app/**/*.js.map`,
     CSS: './src/assets/css',
     IMG: './src/assets/img/**/*',
+    FONT: './src/assets/css/fonts/**/*',
     CONTENT: './src/assets/content/**/*',
     CONFIG: './src/assets/config/**/*'
 }
@@ -84,6 +86,11 @@ gulp.task('copy.css', () => {
     .pipe(concat('site.css'))
     .pipe(gulp.dest(DEST.CSS));
 });
+
+gulp.task('copy.fonts', () => {
+    return gulp.src(SOURCE.FONT)
+     .pipe(gulp.dest(DEST.FONT));
+ });
 
 gulp.task('copy.config', () => {
     return gulp.src(SOURCE.CONFIG)
@@ -184,7 +191,7 @@ gulp.task('build', () => {
 
 gulp.task('prod', (done) => {
     runSequence('cleanup', 'lint', 'build', 'bundle.js',
-                'copy.js', 'copy.css', 'copy.img', 'copy.config',
+                'copy.js', 'copy.css', 'copy.img', 'copy.fonts', 'copy.config',
                 'copy.content', 'copy.index', done);
 });
 gulp.task('test', () => {

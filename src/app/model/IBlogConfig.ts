@@ -1,6 +1,6 @@
 export interface IBlogConfig {
     blogTitle: string;
-    EmphasizeFirstWord: boolean;
+    emphasizeFirstWord: boolean;
     blogByline: string;
     chapters: string[];
 }
