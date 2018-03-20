@@ -80,6 +80,7 @@ hr {
 }
 .brand-background {
     background-color: #292F18;
+    opacity: 0.6;
 }
 
 .bottom-margin-md {

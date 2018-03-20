@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
             this.firstTitleWord = first;
             this.titleRemainder = rest;
         } else {
-            this.titleRemainder = data.blogTitle;
+            this.firstTitleWord = data.blogTitle;
         }
         this.byline = data.blogByline;
     }
