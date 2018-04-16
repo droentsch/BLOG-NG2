@@ -11,6 +11,7 @@ import { ContentDisplayComponent } from './content-display/content-display.compo
 import 'rxjs/Rx'
 import { BroadcastService } from '../service/broadcast.service';
 import { ContentService } from '../service/content.service';
+import { LinearNavComponent } from './linear-nav/linear-nav.component';
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { ContentService } from '../service/content.service';
         HeaderComponent,
         BodyComponent,
         ContentDisplayComponent,
+        LinearNavComponent,
     ],
     providers: [
         Title,
