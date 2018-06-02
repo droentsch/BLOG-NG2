@@ -15,6 +15,7 @@ let maps = require('gulp-sourcemaps');
 let KarmaServer = require('karma').Server;
 
 let tsProject = ts.createProject('./src/tsconfig.json');
+let tsServerProject = ts.createProject('./tsconfig.server.json');
 let lib = new TaskLib();
 const DEST = {
     ROOT: './dist',
@@ -32,7 +33,7 @@ const TARGET = DEST.PROD; // default
 const APP = `${DEST.ROOT}/app`;
 const DEST_JS = path.join(TARGET, 'js');
 const LINT_CONFIG = 'tslint.json';
-
+const NODE_TS = './server.ts';
 const SOURCE = {
     ROOT: './src/app',
     TS: `./src/app/**/*.ts`,
@@ -187,6 +188,12 @@ gulp.task('build', () => {
         .pipe(tsProject()).js
         .pipe(maps.write())
         .pipe(gulp.dest(APP));
+});
+
+gulp.task('build.server', () => {
+    return gulp.src(NODE_TS)
+        .pipe(tsServerProject()).js
+        .pipe(gulp.dest(DEST.ROOT));
 });
 
 gulp.task('prod', (done) => {
