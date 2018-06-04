@@ -6,21 +6,22 @@ import { IBlogConfig } from '../model/IBlogConfig';
 @Injectable()
 export class StateService {
     private _blogConfig: IBlogConfig;
-    private _currentChapter: number;
+    private _currentChapter: string;
 
     public set blogConfig(config: IBlogConfig) {
         this._blogConfig = config;
+        this._currentChapter = this._blogConfig.chapters[0];
     }
 
     public get blogConfig(): IBlogConfig {
         return this._blogConfig;
     }
 
-    public set currentChapter(val: number) {
+    public set currentChapter(val: string) {
         this._currentChapter = val;
     }
 
-    public get currentChapter(): number {
+    public get currentChapter(): string {
         return this._currentChapter;
     }
 }
