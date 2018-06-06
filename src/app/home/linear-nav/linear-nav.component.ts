@@ -11,14 +11,29 @@ export class LinearNavComponent {
 
     private state: StateService;
     private broadcast: BroadcastService;
+    public isFirstChapter: boolean;
+    public isLastChapter: boolean;
 
     constructor(state: StateService, broadcast: BroadcastService) {
         this.state = state;
         this.broadcast = broadcast;
+        this.isFirstChapter = false;
+        this.isLastChapter = false;
+    }
+
+    public gotoFirstChapter() {
+        const lastChap = this.getFirstChapter();
+        if (lastChap !== '') {
+            this.isFirstChapter = true;
+            this.isLastChapter = false;
+            this.broadcast.chapterChange(lastChap);
+        }
     }
     public gotoLastChapter() {
         const lastChap = this.getLastChapter();
         if (lastChap !== '') {
+            this.isFirstChapter = false;
+            this.isLastChapter = true;
             this.broadcast.chapterChange(lastChap);
         }
     }
@@ -38,6 +53,14 @@ export class LinearNavComponent {
         const chaps = this.state.blogConfig.chapters;
         if (chaps.length) {
             this.state.currentChapter = chaps.length - 1;
+            return chaps[this.state.currentChapter];
+        }
+        return '';
+    }
+    private getFirstChapter(): string {
+        const chaps = this.state.blogConfig.chapters;
+        if (chaps.length) {
+            this.state.currentChapter = 0;
             return chaps[this.state.currentChapter];
         }
         return '';
