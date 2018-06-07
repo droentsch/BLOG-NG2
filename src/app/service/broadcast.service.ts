@@ -9,10 +9,12 @@ import { IBlogConfig } from '../model/IBlogConfig';
 export class BroadcastService {
     private configData$: Subject<IBlogConfig>;
     private loadingData$: Subject<boolean>;
+    private chapterChange$: Subject<string>;
 
     constructor() {
         this.configData$ = new Subject<IBlogConfig>();
         this.loadingData$ = new Subject<boolean>();
+        this.chapterChange$ = new Subject<string>();
     }
 
     public configData(data: IBlogConfig): void {
@@ -21,12 +23,19 @@ export class BroadcastService {
     public loadingData(data: boolean): void {
         this.loadingData$.next(data);
     }
+    public chapterChange(data: string): void {
+        this.chapterChange$.next(data);
+    }
     public onConfigData(): Observable<IBlogConfig> {
         return this.configData$.asObservable()
             .map((data) => data);
     }
     public onLoadingData(): Observable<boolean> {
         return this.loadingData$.asObservable()
+            .map((data) => data);
+    }
+    public onChapterChange(): Observable<string> {
+        return this.chapterChange$.asObservable()
             .map((data) => data);
     }
 }

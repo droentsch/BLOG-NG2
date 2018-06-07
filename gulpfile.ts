@@ -199,7 +199,7 @@ gulp.task('build.server', () => {
 gulp.task('prod', (done) => {
     runSequence('cleanup', 'lint', 'build', 'bundle.js',
                 'copy.js', 'copy.css', 'copy.img', 'copy.fonts', 'copy.config',
-                'copy.content', 'copy.index', done);
+                'copy.content', 'copy.index', 'build.server', done);
 });
 gulp.task('test', () => {
     runSequence('delete.coverage', 'dev.build', 'karma.jasmine', 'dev.cleanup');

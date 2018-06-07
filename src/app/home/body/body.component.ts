@@ -4,6 +4,7 @@ import { IBlogConfig } from '../../model/IBlogConfig';
 import { IChapter } from '../../model/IChapter';
 import { ConfigService } from '../../service/config.service';
 import { ContentService } from '../../service/content.service';
+import { StateService } from '../../service/state.service';
 @Component({
     selector: 'blog-body',
     styleUrls: ['body.component.css'],
@@ -14,11 +15,14 @@ export class BodyComponent implements OnInit {
     private broadcast: BroadcastService;
     private configService: ConfigService;
     private contentService: ContentService;
+    private state: StateService;
 
-    constructor(broadcast: BroadcastService, config: ConfigService, chapters: ContentService) {
+    constructor(broadcast: BroadcastService, config: ConfigService,
+                chapters: ContentService, state: StateService) {
         this.broadcast = broadcast;
         this.configService = config;
         this.contentService = chapters;
+        this.state = state;
     }
     public ngOnInit() {
         this.registerBroadcasts();
@@ -26,14 +30,19 @@ export class BodyComponent implements OnInit {
     private registerBroadcasts() {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.loadBlogData(data));
+        this.broadcast.onChapterChange()
+            .subscribe((data: string) => this.getChapter(data))
     }
     private loadBlogData(configData: IBlogConfig) {
-        // On load, show chapter 1 for now
-        const chapter = configData.chapters[0];
-        this.configService.getBlogConfig(chapter)
-            .subscribe((data: IChapter) => this.handleChapter(data),
-            (error: string) => this.handleError(error));
+        const chapter = configData.chapters[this.state.currentChapter];
+        this.getChapter(chapter);
     }
+
+    private getChapter(chapter: string) {
+        this.configService.getBlogConfig(chapter)
+            .subscribe((data: IChapter) => this.handleChapter(data), (error: string) => this.handleError(error));
+    }
+
     private handleChapter(data: IChapter) {
         console.log(data);
         this.contentService.getChapter(data.contentToken)
