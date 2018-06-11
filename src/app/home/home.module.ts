@@ -12,6 +12,8 @@ import 'rxjs/Rx'
 import { BroadcastService } from '../service/broadcast.service';
 import { ContentService } from '../service/content.service';
 import { LinearNavComponent } from './linear-nav/linear-nav.component';
+import { TocComponent } from './toc/toc.component';
+import { ConstantsService } from '../service/constants.service';
 
 @NgModule({
     imports: [
@@ -25,11 +27,13 @@ import { LinearNavComponent } from './linear-nav/linear-nav.component';
         BodyComponent,
         ContentDisplayComponent,
         LinearNavComponent,
+        TocComponent,
     ],
     providers: [
         Title,
         BroadcastService,
         ContentService,
+        ConstantsService,
     ]
 })
 export class HomeModule { }
