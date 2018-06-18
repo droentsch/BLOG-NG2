@@ -2,5 +2,14 @@
     "blogTitle": "Notes From the Upper West Side",
     "emphasizeFirstWord": true,
     "blogByline": "A novel by Dan Roentsch",
-    "chapters" : ["C1", "C2"]
+    "chapters": [
+        {
+            "contentToken": "C1",
+            "chapterName": "Revenge!"
+        },
+        {
+            "contentToken": "C2",
+            "chapterName": "The Beginning"
+        }
+    ]
 }

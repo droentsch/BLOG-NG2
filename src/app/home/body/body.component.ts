@@ -35,7 +35,7 @@ export class BodyComponent implements OnInit {
     }
     private loadBlogData(configData: IBlogConfig) {
         const chapter = configData.chapters[this.state.currentChapter];
-        this.getChapter(chapter);
+        this.getChapter(chapter.contentToken);
     }
 
     private getChapter(chapter: string) {
