@@ -58,7 +58,7 @@ export class LinearNavComponent implements OnInit {
         if (chaps.length) {
             this.setLastChapterState();
             this.state.currentChapter = chaps.length - 1;
-            return chaps[this.state.currentChapter];
+            return chaps[this.state.currentChapter].contentToken;
         }
         return '';
     }
@@ -68,7 +68,7 @@ export class LinearNavComponent implements OnInit {
         if (chaps.length) {
             this.setFirstChapterState();
             this.state.currentChapter = 0;
-            return chaps[this.state.currentChapter];
+            return chaps[this.state.currentChapter].contentToken;
         }
         return '';
     }
@@ -82,7 +82,7 @@ export class LinearNavComponent implements OnInit {
             } else if (this.state.currentChapter === 0) {
                 this.setFirstChapterState();
             }
-            return chaps[this.state.currentChapter];
+            return chaps[this.state.currentChapter].contentToken;
         }
         return '';
     }
