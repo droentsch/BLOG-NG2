@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConstantsService } from '../../service/constants.service';
 import { BroadcastService } from '../../service/broadcast.service';
+import { IBlogConfig } from '../../model/IBlogConfig';
+import { IChapter } from '../../model/IChapter';
 
 @Component({
     selector: 'toc',
@@ -9,6 +11,7 @@ import { BroadcastService } from '../../service/broadcast.service';
 })
 export class TocComponent implements OnInit {
     public tocHeader: string;
+    public chapters: IChapter[];
     private constants: ConstantsService;
     private broadcast: BroadcastService;
 
@@ -18,5 +21,10 @@ export class TocComponent implements OnInit {
         this.tocHeader = this.constants.TOC_HEADER;
     }
     public ngOnInit() {
+        this.broadcast.onConfigData()
+            .subscribe((data: IBlogConfig) => this.loadTOCData(data));
+    }
+    private loadTOCData(data: IBlogConfig) {
+        this.chapters = data.chapters;
     }
 }
