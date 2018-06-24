@@ -24,6 +24,9 @@ export class TocComponent implements OnInit {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.loadTOCData(data));
     }
+    public getChapter(token: string) {
+        this.broadcast.chapterIndexChange(token);
+    }
     private loadTOCData(data: IBlogConfig) {
         this.chapters = data.chapters;
     }

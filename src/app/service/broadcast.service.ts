@@ -10,6 +10,7 @@ export class BroadcastService {
     private configData$: Subject<IBlogConfig>;
     private loadingData$: Subject<boolean>;
     private chapterChange$: Subject<string>;
+    private chapterIndexChange$: Subject<number>;
 
     constructor() {
         this.configData$ = new Subject<IBlogConfig>();

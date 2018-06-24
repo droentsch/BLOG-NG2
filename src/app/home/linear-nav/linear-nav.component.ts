@@ -2,6 +2,7 @@ import  { Component, OnInit } from '@angular/core';
 import { StateService } from '../../service/state.service';
 import { BroadcastService } from '../../service/broadcast.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
+import { IChapter } from '../../model/IChapter';
 
 @Component({
     selector: 'linear-nav',
@@ -28,6 +29,8 @@ export class LinearNavComponent implements OnInit {
     private registerBroadcasts() {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.setFirstChapterState());
+        this.broadcast.onChapterChange()
+            .subscribe((data: string) => this.indexChapterFromToken(data));
     }
     public gotoFirstChapter() {
         const lastChap = this.getFirstChapter();
@@ -95,6 +98,16 @@ export class LinearNavComponent implements OnInit {
     private setLastChapterState() {
         this.isFirstChapter = false;
         this.isLastChapter = true;
+    }
+
+    private indexChapterFromToken(token: string): void {
+        let index: number;
+        this.state.blogConfig.chapters.forEach((val: IChapter, idx: number) => {
+            if (val.contentToken = token) {
+                index = idx;
+                break;
+            }
+        })
     }
 }
 
