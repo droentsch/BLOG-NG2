@@ -11,6 +11,7 @@ import { IChapter } from '../../model/IChapter';
 })
 export class TocComponent implements OnInit {
     public tocHeader: string;
+    public showTOC: boolean;
     public chapters: IChapter[];
     private constants: ConstantsService;
     private broadcast: BroadcastService;
@@ -19,13 +20,17 @@ export class TocComponent implements OnInit {
         this.broadcast = broadcast;
         this.constants = constants;
         this.tocHeader = this.constants.TOC_HEADER;
+        this.showTOC = false;
     }
     public ngOnInit() {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.loadTOCData(data));
     }
-    public getChapter(token: string) {
-        this.broadcast.chapterIndexChange(token);
+    public getChapterIndex(index: number) {
+        this.broadcast.chapterIndexChange(index);
+    }
+    public toggleTOC(): void {
+        this.showTOC = !this.showTOC;
     }
     private loadTOCData(data: IBlogConfig) {
         this.chapters = data.chapters;

@@ -29,8 +29,8 @@ export class LinearNavComponent implements OnInit {
     private registerBroadcasts() {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.setFirstChapterState());
-        this.broadcast.onChapterChange()
-            .subscribe((data: string) => this.indexChapterFromToken(data));
+        this.broadcast.onChapterIndexChange()
+            .subscribe((data: number) => this.getChapter(data));
     }
     public gotoFirstChapter() {
         const lastChap = this.getFirstChapter();
@@ -98,16 +98,6 @@ export class LinearNavComponent implements OnInit {
     private setLastChapterState() {
         this.isFirstChapter = false;
         this.isLastChapter = true;
-    }
-
-    private indexChapterFromToken(token: string): void {
-        let index: number;
-        this.state.blogConfig.chapters.forEach((val: IChapter, idx: number) => {
-            if (val.contentToken = token) {
-                index = idx;
-                break;
-            }
-        })
     }
 }
 

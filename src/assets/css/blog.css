@@ -249,7 +249,7 @@ hr {
 /* icon fonts */
 @font-face {
     font-family: 'icomoonNavSet';
-    src:  url(fonts/icomoonNavSet.eot?ypz6iw);
+    src:  url(fonts/icons/icomoonNavSet.eot?ypz6iw);
     src:  url(fonts/icons/icomoonNavSet.eot?ypz6iw#iefix) format('embedded-opentype'),
       url(fonts/icons/icomoonNavSet.ttf?ypz6iw) format('truetype'),
       url(fonts/icons/icomoonNavSet.woff?ypz6iw) format('woff'),
@@ -257,10 +257,19 @@ hr {
     font-weight: normal;
     font-style: normal;
   }
-  
+  @font-face {
+    font-family: 'icomoonTOC';
+    src:  url(fonts/icons/icomoonTOC.eot?rc3s8i);
+    src:  url(fonts/icons/icomoonTOC.eot?rc3s8i#iefix) format('embedded-opentype'),
+      url(fonts/icons/icomoonTOC.ttf?rc3s8i) format('truetype'),
+      url(fonts/icons/icomoonTOC.woff?rc3s8i) format('woff'),
+      url(fonts/icons/icomoonTOC.svg?rc3s8i#icomoonTOC) format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+    
   [class^="icon-"], [class*=" icon-"] {
     font-family: 'icomoonNavSet' !important;
-    speak: none;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -269,7 +278,7 @@ hr {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   .icon-first-nav:before {
     content: "\ea21";
   }

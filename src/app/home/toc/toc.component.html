@@ -1,14 +1,17 @@
 <div>
     <div class="row">
         <div class="col-md-12 brand-background">
-            <div class="toc-header white-text">
-                {{ tocHeader }}
+            <div class="toc-header white-text pointer" [ngClass]="tocHeader" (click)="toggleTOC()">
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div *ngFor="let chapter of chapters; let i = index" (click)="getChapter(index)"><span>{{ chapter.chapterName }}</span></div>
+    <div *ngIf="showTOC">
+        <div class="row" *ngFor="let chapter of chapters; let i = index">
+            <div class="col-md-12">
+                <div (click)="getChapterIndex(i)">
+                    <span class="pointer">{{ chapter.chapterName }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
