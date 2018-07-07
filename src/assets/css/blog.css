@@ -27,6 +27,15 @@
     overflow: visible;
     min-height: 1600px;
 }
+
+.list-bg {
+    background-image: url(../img/blue_parchment.jpg);
+    font-family: garamondregular;
+    z-index: 100;
+    padding: 2px 2px 2px 4px;
+    overflow: visible;
+}
+
 hr {
     display: block;
     -webkit-margin-before: 0.5em;
@@ -99,15 +108,6 @@ hr {
     font-size:1em;
 }
 
-.toc-body {
-    font-size: 18px;
-    font-weight: 900;
-    line-height: 30px;
-    padding-top: 20px;
-    padding-right: 25px;
-    font-size: 24px;
-}
-
 .credit {
     color: #ffac47;
     padding-left: 30px;
@@ -151,7 +151,6 @@ hr {
 .italic {
     font-style: italic;
 }
-
 
 .chapterHead {
     font-size: 40px;
@@ -211,28 +210,34 @@ hr {
     font-weight: 900;
     font-size: 50px;
 }
+
 .bigger {
     font-weight: 900;
     font-size: 75px;
 }
+
 .nfuws-caption {
     color: rgb(247, 240, 214);
     font-family: NewsCycleRegular;
     font-size: 35px;
 }
-.headerItem, .headerItem a {
+.
+headerItem, .headerItem a {
     color: rgb(226, 93, 19);
     float: left;
     margin-right: 20px;
     font-size: 14px;
     font-weight: 900;
 }
+
 .headerItem a {
     text-decoration: none;
 }
+
 .heading {
     background-color:  #000000;
 }
+
 .highlight {
     color: rgb(226, 93, 19);
     font-family: NewsCycleRegular;

@@ -17,4 +17,11 @@
   .toc-list-numbered-nav:before {
     content: "\e9b9";
   }
+
+  .list-header {
+    font-size: 3em;
+  }
   
+  .list-container {
+    padding-left: 2em;
+  }

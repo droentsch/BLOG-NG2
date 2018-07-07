@@ -11,6 +11,7 @@ import { IChapter } from '../../model/IChapter';
 })
 export class TocComponent implements OnInit {
     public tocHeader: string;
+    public tocTitle: string;
     public showTOC: boolean;
     public chapters: IChapter[];
     private constants: ConstantsService;
@@ -20,6 +21,7 @@ export class TocComponent implements OnInit {
         this.broadcast = broadcast;
         this.constants = constants;
         this.tocHeader = this.constants.TOC_HEADER;
+        this.tocTitle = this.constants.TOC_TITLE;
         this.showTOC = false;
     }
     public ngOnInit() {
