@@ -24,4 +24,12 @@
   
   .list-container {
     padding-left: 2em;
+    text-indent: -2em;
+  }
+
+  .menu-text {
+    font-size: 1.5em;
+    font-family: garamondregular;
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 10px #00ff80, 0 0 10px #00ff80, 0 0 10px #00ff80, 0 0 10px #00ff80, 0 0 75px #ff0080;
   }

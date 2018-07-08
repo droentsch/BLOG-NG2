@@ -28,14 +28,6 @@
     min-height: 1600px;
 }
 
-.list-bg {
-    background-image: url(../img/blue_parchment.jpg);
-    font-family: garamondregular;
-    z-index: 100;
-    padding: 2px 2px 2px 4px;
-    overflow: visible;
-}
-
 hr {
     display: block;
     -webkit-margin-before: 0.5em;
