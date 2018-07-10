@@ -1,12 +1,12 @@
 <div class="list-container">
     <div class="row">
         <div class="col-md-12 brand-background">
-            <div class="list-header white-text pointer" [title]="tocTitle" [ngClass]="tocHeader" (click)="toggleTOC()">
+            <div class="list-header green-text pointer" [title]="tocTitle" [ngClass]="tocHeader" (click)="toggleTOC()">
             </div>
         </div>
     </div>
     <div class="row"></div>
-    <div *ngIf="showTOC">
+    <div *ngIf="showTOC" class="top-sm brand-background">
         <div class="row" *ngFor="let chapter of chapters; let i = index">
             <div class="col-md-12">
                 <div (click)="getChapterIndex(i)">
