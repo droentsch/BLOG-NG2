@@ -30,16 +30,16 @@ export class BodyComponent implements OnInit {
     private registerBroadcasts() {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.loadBlogData(data));
-        this.broadcast.onChapterChange()
-            .subscribe((data: string) => this.getChapter(data))
+        this.broadcast.onChapterIndexChange()
+            .subscribe((data: number) => this.getChapter(data))
     }
     private loadBlogData(configData: IBlogConfig) {
-        const chapter = configData.chapters[this.state.currentChapter];
-        this.getChapter(chapter);
+        this.getChapter(this.state.currentChapter);
     }
 
-    private getChapter(chapter: string) {
-        this.configService.getBlogConfig(chapter)
+    private getChapter(chapterIndex: number) {
+        const chapter = this.state.blogConfig.chapters[chapterIndex];
+        this.configService.getBlogConfig(chapter.contentToken)
             .subscribe((data: IChapter) => this.handleChapter(data), (error: string) => this.handleError(error));
     }
 

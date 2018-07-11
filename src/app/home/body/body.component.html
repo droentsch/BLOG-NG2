@@ -1,6 +1,11 @@
-<div class="container body-separator">
+<div class="container-fluid body-separator">
     <div class="row">
-        <div class="col-xs-10 col-md-10 offset-md-2 thumbnail book">
+        <div class = "col-md-2 col-md-offset-1">
+            <toc></toc>
+        </div>
+        <div class = "col-md-1">
+        </div>
+        <div class="col-xs-8 col-md-8 thumbnail book">
             <linear-nav></linear-nav>
             <content-display [content]="chapter"></content-display>
         </div>

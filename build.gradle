@@ -10,7 +10,7 @@ node {
 }
 
 task wrapper(type:Wrapper) {
-    gradleVersion = '2.11'
+    gradleVersion = '4.8'
 }
 
 def getTimestamp() {

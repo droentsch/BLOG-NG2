@@ -10,11 +10,13 @@ export class BroadcastService {
     private configData$: Subject<IBlogConfig>;
     private loadingData$: Subject<boolean>;
     private chapterChange$: Subject<string>;
+    private chapterIndexChange$: Subject<number>;
 
     constructor() {
         this.configData$ = new Subject<IBlogConfig>();
         this.loadingData$ = new Subject<boolean>();
         this.chapterChange$ = new Subject<string>();
+        this.chapterIndexChange$ = new Subject<number>();
     }
 
     public configData(data: IBlogConfig): void {
@@ -26,6 +28,9 @@ export class BroadcastService {
     public chapterChange(data: string): void {
         this.chapterChange$.next(data);
     }
+    public chapterIndexChange(data: number): void {
+        this.chapterIndexChange$.next(data);
+    }
     public onConfigData(): Observable<IBlogConfig> {
         return this.configData$.asObservable()
             .map((data) => data);
@@ -36,6 +41,10 @@ export class BroadcastService {
     }
     public onChapterChange(): Observable<string> {
         return this.chapterChange$.asObservable()
+            .map((data) => data);
+    }
+    public onChapterIndexChange(): Observable<number> {
+        return this.chapterIndexChange$.asObservable()
             .map((data) => data);
     }
 }

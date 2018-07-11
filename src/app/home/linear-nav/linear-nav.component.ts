@@ -2,6 +2,7 @@ import  { Component, OnInit } from '@angular/core';
 import { StateService } from '../../service/state.service';
 import { BroadcastService } from '../../service/broadcast.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
+import { IChapter } from '../../model/IChapter';
 
 @Component({
     selector: 'linear-nav',
@@ -28,6 +29,8 @@ export class LinearNavComponent implements OnInit {
     private registerBroadcasts() {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.setFirstChapterState());
+        this.broadcast.onChapterIndexChange()
+            .subscribe((data: number) => this.getChapter(data));
     }
     public gotoFirstChapter() {
         const lastChap = this.getFirstChapter();
@@ -58,7 +61,7 @@ export class LinearNavComponent implements OnInit {
         if (chaps.length) {
             this.setLastChapterState();
             this.state.currentChapter = chaps.length - 1;
-            return chaps[this.state.currentChapter];
+            return chaps[this.state.currentChapter].contentToken;
         }
         return '';
     }
@@ -68,7 +71,7 @@ export class LinearNavComponent implements OnInit {
         if (chaps.length) {
             this.setFirstChapterState();
             this.state.currentChapter = 0;
-            return chaps[this.state.currentChapter];
+            return chaps[this.state.currentChapter].contentToken;
         }
         return '';
     }
@@ -76,13 +79,13 @@ export class LinearNavComponent implements OnInit {
     private getChapter(num: number): string {
         const chaps = this.state.blogConfig.chapters;
         if (this.state.currentChapter + num + 1 <= chaps.length) {
-            this.state.currentChapter = this.state.currentChapter + num;
+            this.state.currentChapter = num;
             if (this.state.currentChapter + 1 === chaps.length) {
                 this.setLastChapterState();
             } else if (this.state.currentChapter === 0) {
                 this.setFirstChapterState();
             }
-            return chaps[this.state.currentChapter];
+            return chaps[this.state.currentChapter].contentToken;
         }
         return '';
     }
