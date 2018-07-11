@@ -10,7 +10,7 @@
         <div class="row" *ngFor="let chapter of chapters; let i = index">
             <div class="col-md-12">
                 <div (click)="getChapterIndex(i)">
-                    <span class="pointer menu-text">{{i+1}}.&nbsp;{{ chapter.chapterName }}</span>
+                    <span class="pointer" [ngClass]="isSelectedClass(i)">{{i+1}}.&nbsp;{{ chapter.chapterName }}</span>
                 </div>
             </div>
         </div>

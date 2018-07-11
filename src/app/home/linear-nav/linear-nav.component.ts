@@ -79,7 +79,7 @@ export class LinearNavComponent implements OnInit {
     private getChapter(num: number): string {
         const chaps = this.state.blogConfig.chapters;
         if (this.state.currentChapter + num + 1 <= chaps.length) {
-            this.state.currentChapter = this.state.currentChapter + num;
+            this.state.currentChapter = num;
             if (this.state.currentChapter + 1 === chaps.length) {
                 this.setLastChapterState();
             } else if (this.state.currentChapter === 0) {
