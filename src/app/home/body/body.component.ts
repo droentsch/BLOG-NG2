@@ -29,11 +29,11 @@ export class BodyComponent implements OnInit {
     }
     private registerBroadcasts() {
         this.broadcast.onConfigData()
-            .subscribe((data: IBlogConfig) => this.loadBlogData(data));
+            .subscribe(() => this.loadBlogData());
         this.broadcast.onChapterIndexChange()
             .subscribe((data: number) => this.getChapter(data))
     }
-    private loadBlogData(configData: IBlogConfig) {
+    private loadBlogData() {
         this.getChapter(this.state.currentChapter);
     }
 

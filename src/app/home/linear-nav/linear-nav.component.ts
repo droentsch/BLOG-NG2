@@ -1,4 +1,4 @@
-import  { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StateService } from '../../service/state.service';
 import { BroadcastService } from '../../service/broadcast.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
@@ -28,58 +28,28 @@ export class LinearNavComponent implements OnInit {
     }
     private registerBroadcasts() {
         this.broadcast.onConfigData()
-            .subscribe((data: IBlogConfig) => this.setFirstChapterState());
+            .subscribe(() => this.setFirstChapterState());
         this.broadcast.onChapterIndexChange()
             .subscribe((data: number) => this.getChapterByIndex(data));
     }
     public gotoFirstChapter() {
-        const lastChap = this.getFirstChapter();
-        if (lastChap !== '') {
-            this.broadcast.chapterChange(lastChap);
-        }
+        this.broadcast.chapterIndexChange(0);
     }
     public gotoLastChapter() {
-        const lastChap = this.getLastChapter();
-        if (lastChap !== '') {
-            this.broadcast.chapterChange(lastChap);
-        }
+        this.broadcast.chapterIndexChange(this.state.blogConfig.chapters.length - 1);
     }
     public gotoNextChapter() {
-        const chap = this.getChapter(1);
-        if (chap !== '') {
-            this.broadcast.chapterChange(chap);
+        const num = this.state.currentChapter + 1;
+        if (num <= this.state.blogConfig.chapters.length - 1) {
+            this.broadcast.chapterIndexChange(num);
         }
     }
     public gotoPreviousChapter() {
-        const chap = this.getChapter(-1);
-        if (chap !== '') {
-            this.broadcast.chapterChange(chap);
+        const num = this.state.currentChapter - 1;
+        if (num >= 0) {
+            this.broadcast.chapterIndexChange(num);
         }
     }
-    private getLastChapter(): string {
-        const chaps = this.state.blogConfig.chapters;
-        if (chaps.length) {
-            this.setLastChapterState();
-            this.state.currentChapter = chaps.length - 1;
-            return chaps[this.state.currentChapter].contentToken;
-        }
-        return '';
-    }
-
-    private getFirstChapter(): string {
-        const chaps = this.state.blogConfig.chapters;
-        if (chaps.length) {
-            this.setFirstChapterState();
-            this.state.currentChapter = 0;
-            return chaps[this.state.currentChapter].contentToken;
-        }
-        return '';
-    }
-
-    private getChapter(num: number): string {
-        return this.getChapterByIndex(this.state.currentChapter + num);
-    }
-
     private getChapterByIndex(idx: number) {
         const chaps = this.state.blogConfig.chapters;
         if (idx + 1 <= chaps.length) {
