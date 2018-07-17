@@ -14,6 +14,18 @@
         {
             "contentToken": "C3",
             "chapterName": "Shit Happens"
+        },
+        {
+            "contentToken": "C4",
+            "chapterName": "Feel the Hate"
+        },
+        {
+            "contentToken": "C5",
+            "chapterName": "SpongeBob Interlude"
+        },
+        {
+            "contentToken": "C6",
+            "chapterName": "Lord of All Tail"
         }
     ]
 }
