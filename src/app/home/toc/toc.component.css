@@ -34,7 +34,6 @@
     font-family: garamondregular;
     padding-left: 2em;
     color: #fff;
-    /* text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00ff80, 0 0 20px #00ff80, 0 0 20px #00ff80, 0 0 20px #00ff80, 0 0 75px #ff0080; */
   }
   .menu-text-selected {
     font-size: 1.5em;
@@ -49,4 +48,8 @@
   .justify-text {
     padding-left: 55px;
     text-indent: -70px;
+  }
+  .toc-text {
+    line-height: 2em;
+    margin-top: 1em;
   }
