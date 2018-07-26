@@ -10,6 +10,46 @@
         {
             "contentToken": "C2",
             "chapterName": "The Beginning"
+        },
+        {
+            "contentToken": "C3",
+            "chapterName": "Shit Happens"
+        },
+        {
+            "contentToken": "C4",
+            "chapterName": "Feel the Hate"
+        },
+        {
+            "contentToken": "C5",
+            "chapterName": "SpongeBob Interlude"
+        },
+        {
+            "contentToken": "C6",
+            "chapterName": "Lord of All Tail"
+        },
+        {
+            "contentToken": "C7",
+            "chapterName": "Wake Up Call"
+        },
+        {
+            "contentToken": "C8",
+            "chapterName": "Junior's Gothic Chasm"
+        },
+        {
+            "contentToken": "C9",
+            "chapterName": "My Wife Works for Hed"
+        },
+        {
+            "contentToken": "C10",
+            "chapterName": "Biz Trumps Ex-Hooker"
+        },
+        {
+            "contentToken": "C11",
+            "chapterName": "Xanax Interlude"
+        },
+        {
+            "contentToken": "C12",
+            "chapterName": "Let That Be a Lesson To Ya"
         }
     ]
 }

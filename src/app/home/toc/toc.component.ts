@@ -26,13 +26,21 @@ export class TocComponent implements OnInit {
         this.showTOC = false;
     }
     public ngOnInit() {
+        this.registerBroadcast();
+        this.currentIndex = 0;
+    }
+    public registerBroadcast() {
         this.broadcast.onConfigData()
             .subscribe((data: IBlogConfig) => this.loadTOCData(data));
-        this.currentIndex = 0;
+        this.broadcast.onChapterIndexChange()
+            .subscribe((data: number) => this.setChapterIndex(data))
     }
     public getChapterIndex(index: number) {
         this.currentIndex = index;
         this.broadcast.chapterIndexChange(index);
+    }
+    public setChapterIndex(index: number) {
+        this.currentIndex = index;
     }
     public toggleTOC(): void {
         this.showTOC = !this.showTOC;
