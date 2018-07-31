@@ -3,6 +3,7 @@ import { ConstantsService } from '../../service/constants.service';
 import { BroadcastService } from '../../service/broadcast.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
 import { IChapter } from '../../model/IChapter';
+import { TocState } from '../../model/TocState.enum';
 
 @Component({
     selector: 'toc',
@@ -17,6 +18,7 @@ export class TocComponent implements OnInit {
     private currentIndex: number;
     private constants: ConstantsService;
     private broadcast: BroadcastService;
+    private troggle: TocState;
 
     constructor(constants: ConstantsService, broadcast: BroadcastService) {
         this.broadcast = broadcast;
@@ -24,6 +26,7 @@ export class TocComponent implements OnInit {
         this.tocHeader = this.constants.TOC_HEADER;
         this.tocTitle = this.constants.TOC_TITLE;
         this.showTOC = false;
+        this.troggle = TocState.HIDDEN;
     }
     public ngOnInit() {
         this.registerBroadcast();
@@ -42,8 +45,13 @@ export class TocComponent implements OnInit {
     public setChapterIndex(index: number) {
         this.currentIndex = index;
     }
-    public toggleTOC(): void {
-        this.showTOC = !this.showTOC;
+    public troggleTOC(): void {
+        if (this.troggle === TocState.HIDDEN) {
+            this.showTOC = !this.showTOC;
+            this.troggle = TocState.SHOWN;
+        } else if (this.troggle === TocState.SHOWN) {
+            this.chapters = this.chapters.reverse();
+        }
     }
     public isSelectedClass(index: number) {
         if (index === this.currentIndex) {

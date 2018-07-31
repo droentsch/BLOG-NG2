@@ -5,51 +5,63 @@
     "chapters": [
         {
             "contentToken": "C1",
-            "chapterName": "Revenge!"
+            "chapterName": "Revenge!",
+            "Number": 1
         },
         {
             "contentToken": "C2",
-            "chapterName": "The Beginning"
+            "chapterName": "The Beginning",
+            "Number": 2
         },
         {
             "contentToken": "C3",
-            "chapterName": "Shit Happens"
+            "chapterName": "Shit Happens",
+            "Number": 3
         },
         {
             "contentToken": "C4",
-            "chapterName": "Feel the Hate"
+            "chapterName": "Feel the Hate",
+            "Number": 4
         },
         {
             "contentToken": "C5",
-            "chapterName": "SpongeBob Interlude"
+            "chapterName": "SpongeBob Interlude",
+            "Number": 5
         },
         {
             "contentToken": "C6",
-            "chapterName": "Lord of All Tail"
+            "chapterName": "Lord of All Tail",
+            "Number": 6
         },
         {
             "contentToken": "C7",
-            "chapterName": "Wake Up Call"
+            "chapterName": "Wake Up Call",
+            "Number": 7
         },
         {
             "contentToken": "C8",
-            "chapterName": "Junior's Gothic Chasm"
+            "chapterName": "Junior's Gothic Chasm",
+            "Number": 8
         },
         {
             "contentToken": "C9",
-            "chapterName": "My Wife Works for Hed"
+            "chapterName": "My Wife Works for Hed",
+            "Number": 9
         },
         {
             "contentToken": "C10",
-            "chapterName": "Biz Trumps Ex-Hooker"
+            "chapterName": "Biz Trumps Ex-Hooker",
+            "Number": 10
         },
         {
             "contentToken": "C11",
-            "chapterName": "Xanax Interlude"
+            "chapterName": "Xanax Interlude",
+            "Number": 11
         },
         {
             "contentToken": "C12",
-            "chapterName": "Let That Be a Lesson To Ya"
+            "chapterName": "Let That Be a Lesson To Ya",
+            "Number": 12
         }
     ]
 }

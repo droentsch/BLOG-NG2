@@ -18,7 +18,52 @@
     font-weight: normal;
     font-style: normal;
 }
+/* icon fonts */
+@font-face {
+    font-family: 'icomoonNavSet';
+    src:  url(fonts/icons/icomoonNavSet.eot?ypz6iw);
+    src:  url(fonts/icons/icomoonNavSet.eot?ypz6iw#iefix) format('embedded-opentype'),
+      url(fonts/icons/icomoonNavSet.ttf?ypz6iw) format('truetype'),
+      url(fonts/icons/icomoonNavSet.woff?ypz6iw) format('woff'),
+      url(fonts/icons/icomoonNavSet.svg?ypz6iw#icomoonNavSet) format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'icomoonTOC';
+    src:  url(fonts/icons/icomoonTOC.eot?rc3s8i);
+    src:  url(fonts/icons/icomoonTOC.eot?rc3s8i#iefix) format('embedded-opentype'),
+      url(fonts/icons/icomoonTOC.ttf?rc3s8i) format('truetype'),
+      url(fonts/icons/icomoonTOC.woff?rc3s8i) format('woff'),
+      url(fonts/icons/icomoonTOC.svg?rc3s8i#icomoonTOC) format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+    
+  [class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoonNavSet' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
+  .icon-first-nav:before {
+    content: "\ea21";
+  }
+  .icon-last-nav:before {
+    content: "\ea22";
+  }
+  .icon-previous2-nav:before {
+    content: "\ea23";
+  }
+  .icon-next2-nav:before {
+    content: "\ea24";
+  }
+  
 .book {
     background-image: url(../img/parchment.jpg);
     font-family: garamondregular;
@@ -213,8 +258,7 @@ hr {
     font-family: NewsCycleRegular;
     font-size: 35px;
 }
-.
-headerItem, .headerItem a {
+.headerItem, .headerItem a {
     color: rgb(226, 93, 19);
     float: left;
     margin-right: 20px;
@@ -243,49 +287,59 @@ headerItem, .headerItem a {
     margin-left: auto;
     margin-right: auto;
 }
-/* icon fonts */
-@font-face {
-    font-family: 'icomoonNavSet';
-    src:  url(fonts/icons/icomoonNavSet.eot?ypz6iw);
-    src:  url(fonts/icons/icomoonNavSet.eot?ypz6iw#iefix) format('embedded-opentype'),
-      url(fonts/icons/icomoonNavSet.ttf?ypz6iw) format('truetype'),
-      url(fonts/icons/icomoonNavSet.woff?ypz6iw) format('woff'),
-      url(fonts/icons/icomoonNavSet.svg?ypz6iw#icomoonNavSet) format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'icomoonTOC';
-    src:  url(fonts/icons/icomoonTOC.eot?rc3s8i);
-    src:  url(fonts/icons/icomoonTOC.eot?rc3s8i#iefix) format('embedded-opentype'),
-      url(fonts/icons/icomoonTOC.ttf?rc3s8i) format('truetype'),
-      url(fonts/icons/icomoonTOC.woff?rc3s8i) format('woff'),
-      url(fonts/icons/icomoonTOC.svg?rc3s8i#icomoonTOC) format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
-    
-  [class^="icon-"], [class*=" icon-"] {
-    font-family: 'icomoonNavSet' !important;
+.scrollable {
+    overflow-y: auto;
+}
+
+[class^="toc-"], [class*=" toc-"] {
+    font-family: 'icomoonTOC' !important;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
     line-height: 1;
+  
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  .toc-list-numbered-nav:before {
+    content: "\e9b9";
+  }
 
-  .icon-first-nav:before {
-    content: "\ea21";
-  }
-  .icon-last-nav:before {
-    content: "\ea22";
-  }
-  .icon-previous2-nav:before {
-    content: "\ea23";
-  }
-  .icon-next2-nav:before {
-    content: "\ea24";
+  .list-header {
+    font-size: 3em;
+    color: #fff;
+    padding-left: 2em;
   }
   
+  .list-container {
+    padding-left: 2em;
+    text-indent: -2em;
+  }
+
+  .menu-text {
+    font-size: 1.5em;
+    font-family: garamondregular;
+    padding-left: 2em;
+    color: #fff;
+  }
+  .menu-text-selected {
+    font-size: 1.5em;
+    font-family: garamondregular;
+    padding-left: 2em;
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00ff80, 0 0 20px #00ff80, 0 0 20px #00ff80, 0 0 20px #00ff80, 0 0 75px #00ff80;
+  }
+  .dense-background {
+    opacity: 0.75;
+  }
+  .justify-text {
+    padding-left: 55px;
+    text-indent: -70px;
+  }
+  .toc-text {
+    line-height: 2em;
+    margin-top: 1em;
+  }
+
