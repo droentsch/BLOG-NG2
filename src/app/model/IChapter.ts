@@ -3,5 +3,5 @@ export interface IChapter {
     title: string;
     pubDate: string;
     contentToken: string;
-    Number: number;
+    number: number;
 }

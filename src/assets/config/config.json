@@ -6,62 +6,62 @@
         {
             "contentToken": "C1",
             "chapterName": "Revenge!",
-            "Number": 1
+            "number": 1
         },
         {
             "contentToken": "C2",
             "chapterName": "The Beginning",
-            "Number": 2
+            "number": 2
         },
         {
             "contentToken": "C3",
             "chapterName": "Shit Happens",
-            "Number": 3
+            "number": 3
         },
         {
             "contentToken": "C4",
             "chapterName": "Feel the Hate",
-            "Number": 4
+            "number": 4
         },
         {
             "contentToken": "C5",
             "chapterName": "SpongeBob Interlude",
-            "Number": 5
+            "number": 5
         },
         {
             "contentToken": "C6",
             "chapterName": "Lord of All Tail",
-            "Number": 6
+            "number": 6
         },
         {
             "contentToken": "C7",
             "chapterName": "Wake Up Call",
-            "Number": 7
+            "number": 7
         },
         {
             "contentToken": "C8",
             "chapterName": "Junior's Gothic Chasm",
-            "Number": 8
+            "number": 8
         },
         {
             "contentToken": "C9",
             "chapterName": "My Wife Works for Hed",
-            "Number": 9
+            "number": 9
         },
         {
             "contentToken": "C10",
             "chapterName": "Biz Trumps Ex-Hooker",
-            "Number": 10
+            "number": 10
         },
         {
             "contentToken": "C11",
             "chapterName": "Xanax Interlude",
-            "Number": 11
+            "number": 11
         },
         {
             "contentToken": "C12",
             "chapterName": "Let That Be a Lesson To Ya",
-            "Number": 12
+            "number": 12
         }
     ]
 }

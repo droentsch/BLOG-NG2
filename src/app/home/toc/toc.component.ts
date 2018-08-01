@@ -30,7 +30,7 @@ export class TocComponent implements OnInit {
     }
     public ngOnInit() {
         this.registerBroadcast();
-        this.currentIndex = 0;
+        this.currentIndex = 1;
     }
     public registerBroadcast() {
         this.broadcast.onConfigData()
@@ -47,10 +47,15 @@ export class TocComponent implements OnInit {
     }
     public troggleTOC(): void {
         if (this.troggle === TocState.HIDDEN) {
-            this.showTOC = !this.showTOC;
+            this.showTOC = true;
             this.troggle = TocState.SHOWN;
         } else if (this.troggle === TocState.SHOWN) {
             this.chapters = this.chapters.reverse();
+            this.troggle = TocState.DESCENDING;
+        } else if (this.troggle === TocState.DESCENDING) {
+            this.chapters = this.chapters.reverse();
+            this.showTOC = false;
+            this.troggle = TocState.HIDDEN;
         }
     }
     public isSelectedClass(index: number) {
