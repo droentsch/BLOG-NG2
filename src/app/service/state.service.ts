@@ -10,7 +10,7 @@ export class StateService {
 
     public set blogConfig(config: IBlogConfig) {
         this._blogConfig = config;
-        this._currentChapter = 0;
+        this._currentChapter = 1;
     }
 
     public get blogConfig(): IBlogConfig {

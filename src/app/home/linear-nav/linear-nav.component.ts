@@ -33,35 +33,34 @@ export class LinearNavComponent implements OnInit {
             .subscribe((data: number) => this.getChapterByIndex(data));
     }
     public gotoFirstChapter() {
-        this.broadcast.chapterIndexChange(0);
+        this.broadcast.chapterIndexChange(1);
     }
     public gotoLastChapter() {
-        this.broadcast.chapterIndexChange(this.state.blogConfig.chapters.length - 1);
+        this.broadcast.chapterIndexChange(this.state.blogConfig.chapters.length);
     }
     public gotoNextChapter() {
         const num = this.state.currentChapter + 1;
-        if (num <= this.state.blogConfig.chapters.length - 1) {
-            this.broadcast.chapterIndexChange(num);
-        }
+        this.broadcast.chapterIndexChange(num);
     }
     public gotoPreviousChapter() {
         const num = this.state.currentChapter - 1;
-        if (num >= 0) {
-            this.broadcast.chapterIndexChange(num);
-        }
+        this.broadcast.chapterIndexChange(num);
     }
     private getChapterByIndex(idx: number) {
         const chaps = this.state.blogConfig.chapters;
-        if (idx + 1 <= chaps.length) {
-            this.state.currentChapter = idx;
-            if (this.state.currentChapter + 1 === chaps.length) {
+        let chapIndex = chaps.findIndex((val: IChapter) => {
+            return val.number === idx;
+        });
+        if (chapIndex !== -1) {
+            this.state.currentChapter = chaps[chapIndex].number;
+            if (chapIndex + 1 === chaps.length) {
                 this.setLastChapterState();
-            } else if (this.state.currentChapter === 0) {
+            } else if (chapIndex === 0) {
                 this.setFirstChapterState();
             } else {
                 this.setMidChapterState();
             }
-            return chaps[this.state.currentChapter].contentToken;
+            return chaps[chapIndex].contentToken;
         }
         return '';
     }

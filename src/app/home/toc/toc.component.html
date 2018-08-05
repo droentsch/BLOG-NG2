@@ -9,7 +9,7 @@
     <div *ngIf="showTOC" class="top-sm brand-background dense-background">
         <div class="row" *ngFor="let chapter of chapters">
             <div class="col-md-12 justify-text toc-text">
-                <div (click)="getChapterIndex(i)">
+                <div (click)="getChapterIndex(chapter.number)">
                     <span class="pointer" [ngClass]="isSelectedClass(chapter.number)">{{ chapter.number }}.&nbsp;{{ chapter.chapterName }}</span>
                 </div>
             </div>
