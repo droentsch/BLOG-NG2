@@ -36,7 +36,8 @@ export class LinearNavComponent implements OnInit {
         this.broadcast.chapterIndexChange(1);
     }
     public gotoLastChapter() {
-        this.broadcast.chapterIndexChange(this.state.blogConfig.chapters.length);
+        const lastChapter = this.getLastChapter();
+        this.broadcast.chapterIndexChange(lastChapter.number);
     }
     public gotoNextChapter() {
         const num = this.state.currentChapter + 1;
@@ -48,9 +49,7 @@ export class LinearNavComponent implements OnInit {
     }
     private getChapterByIndex(idx: number) {
         const chaps = this.state.blogConfig.chapters;
-        let chapIndex = chaps.findIndex((val: IChapter) => {
-            return val.number === idx;
-        });
+        let chapIndex = this.getChapterIndexFromNumber(idx);
         if (chapIndex !== -1) {
             this.state.currentChapter = chaps[chapIndex].number;
             if (chapIndex + 1 === chaps.length) {
@@ -78,6 +77,22 @@ export class LinearNavComponent implements OnInit {
     private setLastChapterState() {
         this.isFirstChapter = false;
         this.isLastChapter = true;
+    }
+    private getChapterIndexFromNumber(chapterNumber: number) {
+        return this.state.blogConfig.chapters.findIndex((val) => val.number === chapterNumber);
+    }
+    private getLastChapter() {
+        let highVal: IChapter;
+        this.state.blogConfig.chapters.forEach((val) => {
+            if (highVal) {
+                if (val.number > highVal.number) {
+                    highVal = val;
+                }
+            } else {
+                highVal = val;
+            }
+        });
+        return highVal;
     }
 }
 
