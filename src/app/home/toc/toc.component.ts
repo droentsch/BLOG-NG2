@@ -4,6 +4,7 @@ import { BroadcastService } from '../../service/broadcast.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
 import { IChapter } from '../../model/IChapter';
 import { TocState } from '../../model/TocState.enum';
+import { StateService } from '../../service/state.service';
 
 @Component({
     selector: 'toc',
@@ -18,11 +19,13 @@ export class TocComponent implements OnInit {
     private currentIndex: number;
     private constants: ConstantsService;
     private broadcast: BroadcastService;
+    private state: StateService;
     private troggle: TocState;
 
-    constructor(constants: ConstantsService, broadcast: BroadcastService) {
+    constructor(constants: ConstantsService, broadcast: BroadcastService, state: StateService) {
         this.broadcast = broadcast;
         this.constants = constants;
+        this.state = state;
         this.tocHeader = this.constants.TOC_HEADER;
         this.tocTitle = this.constants.TOC_TITLE;
         this.showTOC = false;
@@ -43,7 +46,10 @@ export class TocComponent implements OnInit {
         this.broadcast.chapterIndexChange(index);
     }
     public setChapterIndex(index: number) {
-        this.currentIndex = index;
+        const lastChapter = this.state.getLastChapter();
+        if (index <= lastChapter.number) {
+            this.currentIndex = index;
+        }
     }
     public troggleTOC(): void {
         if (this.troggle === TocState.HIDDEN) {

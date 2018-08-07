@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ConfigService } from './config.service';
 import { IBlogConfig } from '../model/IBlogConfig';
+import { IChapter } from '../model/IChapter';
 
 
 @Injectable()
@@ -23,5 +23,19 @@ export class StateService {
 
     public get currentChapter(): number {
         return this._currentChapter;
+    }
+
+    public getLastChapter() {
+        let highVal: IChapter;
+        this.blogConfig.chapters.forEach((val) => {
+            if (highVal) {
+                if (val.number > highVal.number) {
+                    highVal = val;
+                }
+            } else {
+                highVal = val;
+            }
+        });
+        return highVal;
     }
 }

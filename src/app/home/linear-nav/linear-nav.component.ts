@@ -30,13 +30,13 @@ export class LinearNavComponent implements OnInit {
         this.broadcast.onConfigData()
             .subscribe(() => this.setFirstChapterState());
         this.broadcast.onChapterIndexChange()
-            .subscribe((data: number) => this.getChapterByIndex(data));
+            .subscribe((data: number) => this.setChapterState(data));
     }
     public gotoFirstChapter() {
         this.broadcast.chapterIndexChange(1);
     }
     public gotoLastChapter() {
-        const lastChapter = this.getLastChapter();
+        const lastChapter = this.state.getLastChapter();
         this.broadcast.chapterIndexChange(lastChapter.number);
     }
     public gotoNextChapter() {
@@ -47,21 +47,15 @@ export class LinearNavComponent implements OnInit {
         const num = this.state.currentChapter - 1;
         this.broadcast.chapterIndexChange(num);
     }
-    private getChapterByIndex(idx: number) {
-        const chaps = this.state.blogConfig.chapters;
-        let chapIndex = this.getChapterIndexFromNumber(idx);
-        if (chapIndex !== -1) {
-            this.state.currentChapter = chaps[chapIndex].number;
-            if (chapIndex + 1 === chaps.length) {
-                this.setLastChapterState();
-            } else if (chapIndex === 0) {
-                this.setFirstChapterState();
-            } else {
-                this.setMidChapterState();
-            }
-            return chaps[chapIndex].contentToken;
+    private setChapterState(idx: number) {
+        this.state.currentChapter = idx;
+        if (idx === this.state.getLastChapter().number) {
+            this.setLastChapterState();
+        } else if (idx === 1) {
+            this.setFirstChapterState();
+        } else {
+            this.setMidChapterState();
         }
-        return '';
     }
 
     private setMidChapterState() {
@@ -80,19 +74,6 @@ export class LinearNavComponent implements OnInit {
     }
     private getChapterIndexFromNumber(chapterNumber: number) {
         return this.state.blogConfig.chapters.findIndex((val) => val.number === chapterNumber);
-    }
-    private getLastChapter() {
-        let highVal: IChapter;
-        this.state.blogConfig.chapters.forEach((val) => {
-            if (highVal) {
-                if (val.number > highVal.number) {
-                    highVal = val;
-                }
-            } else {
-                highVal = val;
-            }
-        });
-        return highVal;
     }
 }
 
