@@ -1,16 +1,16 @@
 <div class="list-container">
     <div class="row">
         <div class="col-md-12 brand-background">
-            <div class="list-header green-text pointer" [title]="tocTitle" [ngClass]="tocHeader" (click)="toggleTOC()">
+            <div class="list-header green-text pointer" [title]="tocTitle" [ngClass]="tocHeader" (click)="troggleTOC()">
             </div>
         </div>
     </div>
     <div class="row"></div>
     <div *ngIf="showTOC" class="top-sm brand-background dense-background">
-        <div class="row" *ngFor="let chapter of chapters; let i = index">
+        <div class="row" *ngFor="let chapter of chapters">
             <div class="col-md-12 justify-text toc-text">
-                <div (click)="getChapterIndex(i)">
-                    <span class="pointer" [ngClass]="isSelectedClass(i)">{{i+1}}.&nbsp;{{ chapter.chapterName }}</span>
+                <div (click)="getChapterIndex(chapter.number)">
+                    <span class="pointer" [ngClass]="isSelectedClass(chapter.number)">{{ chapter.number }}.&nbsp;{{ chapter.chapterName }}</span>
                 </div>
             </div>
         </div>
