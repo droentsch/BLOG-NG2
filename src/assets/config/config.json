@@ -62,6 +62,21 @@
             "contentToken": "C12",
             "chapterName": "Let That Be a Lesson To Ya",
             "number": 12
+        },
+        {
+            "contentToken": "C13",
+            "chapterName": "Ladies and Gentlemen: Bangalore Springfield",
+            "number": 13
+        },
+        {
+            "contentToken": "C14",
+            "chapterName": "Live and Learn!",
+            "number": 14
+        },
+        {
+            "contentToken": "C15",
+            "chapterName": "Little Round Jewish Hat",
+            "number": 15
         }
     ]
 }
