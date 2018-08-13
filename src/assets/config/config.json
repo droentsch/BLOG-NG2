@@ -77,6 +77,32 @@
             "contentToken": "C15",
             "chapterName": "Little Round Jewish Hat",
             "number": 15
+        },
+        {
+            "contentToken": "C16",
+            "chapterName" : "No More Wheaty Charms",
+            "number" : 16
+        },        
+        {
+            "chapterName" : "Lounge Act",
+            "contentToken": "C17",
+            "number" : 17
+        },
+        {
+            "chapterName" : "Hopes and The Getting Up Of Them",
+            "contentToken": "C18",
+            "number" : 18
+        },        
+        {
+            "chapterName" : "I Flirt With Cammy",
+            "contentToken": "C19",
+            "number" : 19
+        },
+        {
+            "chapterName" : "A Man Thing",
+            "contentToken": "C20",
+            "number" : 20
         }
+        
     ]
 }
