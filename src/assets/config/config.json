@@ -102,6 +102,36 @@
             "chapterName" : "A Man Thing",
             "contentToken": "C20",
             "number" : 20
+        },
+        {
+            "chapterName" : "While Mommy's on Vacation",
+            "contentToken": "C21",
+            "number" : 21
+        },
+        {
+            "chapterName" : "The Problem With Party Girls",
+            "contentToken": "C22",
+            "number" : 22
+        },
+        {
+            "chapterName" : "Produced By Me",
+            "contentToken": "C23",
+            "number" : 23
+        },
+        {
+            "chapterName" : "Not Even Then",
+            "contentToken": "C24",
+            "number" : 24
+        },
+        {
+            "chapterName" : "Flaky Shades",
+            "contentToken": "C25",
+            "number" : 25
+        },
+        {
+            "chapterName" : "Bitch For a Day",
+            "contentToken": "C26",
+            "number" : 26
         }
         
     ]
