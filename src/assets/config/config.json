@@ -157,6 +157,36 @@
             "chapterName" : "Two Babes in Hot Pants",
             "contentToken": "C31",
             "number" : 31
+        },
+        {
+            "chapterName" : "A Tobacco That Tastes Like a Lady",
+            "contentToken": "C32",
+            "number" : 32
+        },
+        {
+            "chapterName" : "It Isn't Complicated",
+            "contentToken": "C33",
+            "number" : 33
+        },
+        {
+            "chapterName" : "Why Chicks Dig Me Sometimes: A Theory",
+            "contentToken": "C34",
+            "number" : 34
+        },
+        {
+            "chapterName" : "A Short Walk to Cynthia's",
+            "contentToken": "C35",
+            "number" : 35
+        },
+        {
+            "chapterName" : "Like on a Farm",
+            "contentToken": "C36",
+            "number" : 36
+        },
+        {
+            "chapterName" : "The Big Crap Enigma",
+            "contentToken": "C37",
+            "number" : 37
         }
         
     ]
