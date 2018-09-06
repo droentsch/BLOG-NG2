@@ -257,6 +257,66 @@
             "chapterName" : "Dead as Dirt",
             "contentToken": "C51",
             "number" : 51
+        },
+        {
+            "chapterName" : "The Alibi",
+            "contentToken": "C52",
+            "number" : 52
+        },
+        {
+            "chapterName" : "The Ballsy Stratagem",
+            "contentToken": "C53",
+            "number" : 53
+        },
+        {
+            "chapterName" : "The Female Biology",
+            "contentToken": "C54",
+            "number" : 54
+        },
+        {
+            "chapterName" : "An Integral Part of the Plan",
+            "contentToken": "C55",
+            "number" : 55
+        },
+        {
+            "chapterName" : "A Leap of Faith",
+            "contentToken": "C56",
+            "number" : 56
+        },
+        {
+            "chapterName" : "Pairs of Things",
+            "contentToken": "C57",
+            "number" : 57
+        },
+        {
+            "chapterName" : "New Man It Is",
+            "contentToken": "C58",
+            "number" : 58
+        },
+        {
+            "chapterName" : "The Parp Proclivities",
+            "contentToken": "C59",
+            "number" : 59
+        },
+        {
+            "chapterName" : "The Check",
+            "contentToken": "C60",
+            "number" : 60
+        },
+        {
+            "chapterName" : "The Daddy-Free Beach House",
+            "contentToken": "C61",
+            "number" : 61
+        },
+        {
+            "chapterName" : "Moose and Squirrel",
+            "contentToken": "C62",
+            "number" : 62
+        },
+        {
+            "chapterName" : "Lunch is Paulie",
+            "contentToken": "C63",
+            "number" : 63
         }
         
     ]
