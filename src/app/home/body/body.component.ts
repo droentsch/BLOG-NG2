@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { BroadcastService } from '../../service/broadcast.service';
-import { IBlogConfig } from '../../model/IBlogConfig';
 import { IChapter } from '../../model/IChapter';
 import { ConfigService } from '../../service/config.service';
 import { ContentService } from '../../service/content.service';
