@@ -10,7 +10,7 @@ export class ContentService {
     }
 
     public getChapter(token: string): Observable<string> {
-        let content_url = `/content/${token}/${token}.html`;
+        let content_url = `content/${token}/${token}.html`;
         return this.http.get(content_url, {responseType: 'text'});
     }
 

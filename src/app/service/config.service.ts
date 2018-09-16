@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import { IBlogConfig } from '../model/IBlogConfig';
 import { IChapter } from '../model/IChapter';
 
-const CONFIG_URL = '/config/config.json';
+const CONFIG_URL = 'config/config.json';
 
 @Injectable()
 export class ConfigService {
@@ -20,7 +20,7 @@ export class ConfigService {
     }
 
     public getBlogConfig(data: string) {
-        let contentUrl = `/content/${data}/${data}.json`;
+        let contentUrl = `content/${data}/${data}.json`;
         return this.http.get<IChapter>(contentUrl);
     };
 }
