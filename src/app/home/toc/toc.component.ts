@@ -72,6 +72,6 @@ export class TocComponent implements OnInit {
         }
     }
     private loadTOCData(data: IBlogConfig) {
-        this.chapters = data.chapters;
+        this.chapters = data.chapters.reverse();
     }
 }

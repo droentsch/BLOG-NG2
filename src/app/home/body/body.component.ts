@@ -38,13 +38,9 @@ export class BodyComponent implements OnInit {
     }
 
     private getChapter(chapterNumber: number) {
-        const chapIndex = this.state.blogConfig.chapters.findIndex((val) => val.number === chapterNumber);
-        if (chapIndex !== -1) {
-        const chapter = this.state.blogConfig.chapters[chapIndex];
+        const chapter = this.state.blogConfig.chapters.find((val) => val.number === chapterNumber);
         this.configService.getBlogConfig(chapter.contentToken)
             .subscribe((data: IChapter) => this.handleChapter(data), (error: string) => this.handleError(error));
-
-        }
     }
 
     private handleChapter(data: IChapter) {
