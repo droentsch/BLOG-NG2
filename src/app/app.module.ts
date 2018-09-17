@@ -12,8 +12,9 @@ import { ConfigService } from './service/config.service';
 import { StateService } from './service/state.service';
 
 const APP_ROUTES: Routes = [
-    { path: 'home', component: HomeComponent },
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    { path: 'book/:id', component: HomeComponent },
+    { path: '', redirectTo: 'book/1', pathMatch: 'full' },
+    { path: 'book', redirectTo: 'book/1', pathMatch: 'full' },
 ];
 
 @NgModule({
