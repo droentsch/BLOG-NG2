@@ -29,7 +29,7 @@ export class TocComponent implements OnInit {
         this.tocHeader = this.constants.TOC_HEADER;
         this.tocTitle = this.constants.TOC_TITLE;
         this.showTOC = false;
-        this.troggle = TocState.HIDDEN;
+        this.troggle = TocState.DESCENDING;
     }
     public ngOnInit() {
         this.registerBroadcast();
@@ -54,14 +54,14 @@ export class TocComponent implements OnInit {
     public troggleTOC(): void {
         if (this.troggle === TocState.HIDDEN) {
             this.showTOC = true;
-            this.troggle = TocState.SHOWN;
-        } else if (this.troggle === TocState.SHOWN) {
-            this.chapters = this.chapters.reverse();
             this.troggle = TocState.DESCENDING;
-        } else if (this.troggle === TocState.DESCENDING) {
-            this.chapters = this.chapters.reverse();
+        } else if (this.troggle === TocState.SHOWN) {
             this.showTOC = false;
             this.troggle = TocState.HIDDEN;
+        } else if (this.troggle === TocState.DESCENDING) {
+            this.chapters = this.chapters.reverse();
+            this.showTOC = true;
+            this.troggle = TocState.SHOWN;
         }
     }
     public isSelectedClass(index: number) {

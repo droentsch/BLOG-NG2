@@ -25,7 +25,7 @@ export class BodyComponent implements OnInit {
         this.contentService = chapters;
     }
     public ngOnInit() {
-        // this.registerBroadcasts();
+        this.registerBroadcasts();
         if (this.route.snapshot.paramMap.has('id')) {
             this.state.currentChapter = parseInt(this.route.snapshot.paramMap.get('id'), 10);
             this.getChapter(this.state.currentChapter);
@@ -33,7 +33,7 @@ export class BodyComponent implements OnInit {
     }
     private registerBroadcasts() {
         this.broadcast.onConfigData()
-            .subscribe(() => this.loadBlogData());
+            .subscribe(() => this.getRoute()); // TODO: @@HERE
         this.broadcast.onChapterIndexChange()
             .subscribe((data: number) => this.getChapter(data))
     }
