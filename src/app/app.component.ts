@@ -14,12 +14,11 @@ import { IBlogConfig } from './model/IBlogConfig';
 `,
 })
 export class AppComponent implements OnInit {
-    public title: Title;
-    private config: ConfigService;
 
-    constructor(title: Title, config: ConfigService, private state: StateService ) {
-        this.title = title;
-        this.config = config;
+    constructor(private title: Title,
+                private config: ConfigService,
+                private state: StateService,
+                private broadcast: BroadcastService ) {
     }
 
     public ngOnInit() {
@@ -32,6 +31,7 @@ export class AppComponent implements OnInit {
     private handleConfig(data: IBlogConfig): void {
         this.title.setTitle(data.blogTitle);
         this.state.blogConfig = data;
+        this.broadcast.configData(data);
     }
 
     private handleConfigError(error: string): void {
