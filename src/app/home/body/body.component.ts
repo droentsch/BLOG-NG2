@@ -26,16 +26,8 @@ export class BodyComponent implements OnInit {
     }
     public ngOnInit() {
         this.registerBroadcasts();
-        this.registerParamMap();
-    }
-    private registerParamMap(): void {
-        if (this.route.snapshot.paramMap.has('id')) {
-            this.state.currentChapter = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-        }
     }
     private registerBroadcasts() {
-        this.broadcast.onConfigData()
-            .subscribe(() => this.getChapter(this.state.currentChapter));
         this.broadcast.onChapterIndexChange()
             .subscribe((data: number) => this.getChapter(data))
     }
