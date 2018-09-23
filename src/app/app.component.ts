@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
     public ngOnInit() {
         // TODO: CREATE A LOADER COMPONENT
+        this.router.events.subscribe((end: NavigationEnd) => this.handleRoute(end));    
         this.config.getConfig()
             .subscribe((data: IBlogConfig) => this.handleState(data),
                 () => this.handleConfigError);
@@ -33,8 +34,6 @@ export class AppComponent implements OnInit {
     private handleState(data: IBlogConfig): void {
         this.title.setTitle(data.blogTitle);
         this.state.blogConfig = data;
-         // TODO: This is currently an infinite loop
-        this.router.events.subscribe((end: NavigationEnd) => this.handleRoute(end));
     }
 
     private handleConfigError(error: string): void {
