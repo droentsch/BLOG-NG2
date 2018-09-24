@@ -30,14 +30,12 @@ export class AppComponent implements OnInit {
                 this.handleRoute(event);
             }
         });
-        this.config.getConfig()
-            .subscribe((data: IBlogConfig) => this.handleState(data),
-                (err) => this.handleConfigError(err));
     }
 
     private handleState(data: IBlogConfig): void {
         this.title.setTitle(data.blogTitle);
         this.state.blogConfig = data;
+        this.broadcast.chapterIndexChange(this.state.currentChapter);
     }
 
     private handleConfigError(error: string): void {
@@ -46,7 +44,16 @@ export class AppComponent implements OnInit {
     }
 
     private handleRoute(end: NavigationEnd): void {
-        this.state.routesSubscribed = true;
-        console.log(`Url = ${end.url}`);
-    }
+        let chapter = 1;
+        if (end.url !== '/') {
+            chapter = parseInt(end.url.split('/').pop(), 10);
+        }
+        this.state.currentChapter = chapter;
+        console.log(chapter);
+        this.config.getConfig()
+            .subscribe((data: IBlogConfig) =>
+                this.handleState(data)
+            ,
+                (err) => this.handleConfigError(err));
+        }
 }

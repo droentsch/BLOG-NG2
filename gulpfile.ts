@@ -48,7 +48,7 @@ const SOURCE = {
 }
 const LIB = `${DEST}/app/node_modules`;
 const PROD_CODE_FILE = 'app.js';
-const INDEX = './src/index.html';
+const INDEX = './src/default.html';
 const VERSION_REPLACER = /tag11111tag/g;
 const SYS_CONFIG = 'systemjs.config.js';
 const NODE_DIR = 'node_modules';
