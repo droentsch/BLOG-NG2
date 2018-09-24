@@ -10,9 +10,10 @@ import { HomeModule } from './home/home.module';
 import 'rxjs/Rx'
 import { ConfigService } from './service/config.service';
 import { StateService } from './service/state.service';
+import { BodyComponent } from './home/body/body.component';
 
 const APP_ROUTES: Routes = [
-    { path: 'book/:id', component: HomeComponent },
+    { path: 'book/:id', component: BodyComponent },
     { path: '', redirectTo: 'book/1', pathMatch: 'full' },
     { path: 'book', redirectTo: 'book/1', pathMatch: 'full' },
 ];

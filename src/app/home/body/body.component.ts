@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { BroadcastService } from '../../service/broadcast.service';
 import { IChapter } from '../../model/IChapter';
 import { ConfigService } from '../../service/config.service';
 import { ContentService } from '../../service/content.service';
 import { StateService } from '../../service/state.service';
+
 @Component({
     selector: 'blog-body',
     styleUrls: ['body.component.css'],
@@ -18,8 +17,7 @@ export class BodyComponent implements OnInit {
     private contentService: ContentService;
 
     constructor(broadcast: BroadcastService, config: ConfigService,
-        chapters: ContentService, private state: StateService,
-        private route: ActivatedRoute, private router: Router) {
+        chapters: ContentService, private state: StateService) {
         this.broadcast = broadcast;
         this.configService = config;
         this.contentService = chapters;

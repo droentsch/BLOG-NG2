@@ -25,10 +25,14 @@ export class AppComponent implements OnInit {
 
     public ngOnInit() {
         // TODO: CREATE A LOADER COMPONENT
-        this.router.events.subscribe((end: NavigationEnd) => this.handleRoute(end));    
+        this.router.events.subscribe((event) => {
+            if (event instanceof NavigationEnd) {
+                this.handleRoute(event);
+            }
+        });
         this.config.getConfig()
             .subscribe((data: IBlogConfig) => this.handleState(data),
-                () => this.handleConfigError);
+                (err) => this.handleConfigError(err));
     }
 
     private handleState(data: IBlogConfig): void {
@@ -42,7 +46,7 @@ export class AppComponent implements OnInit {
     }
 
     private handleRoute(end: NavigationEnd): void {
-        const chapter = end.id;
-        console.log(`Chapter = ${chapter}`);
+        this.state.routesSubscribed = true;
+        console.log(`Url = ${end.url}`);
     }
 }
