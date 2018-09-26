@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
     private handleState(data: IBlogConfig): void {
         this.title.setTitle(data.blogTitle);
         this.state.blogConfig = data;
+        this.broadcast.configData(data);
         this.broadcast.chapterIndexChange(this.state.currentChapter);
     }
 

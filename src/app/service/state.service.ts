@@ -45,4 +45,8 @@ export class StateService {
         });
         return highVal;
     }
+    public clone<T>(obj: T): T {
+        let Tstring = JSON.stringify(obj);
+        return (JSON.parse(Tstring));
+    }
 }

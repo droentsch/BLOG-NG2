@@ -35,6 +35,8 @@ export class TocComponent implements OnInit {
         this.registerBroadcast();
     }
     public registerBroadcast() {
+        this.broadcast.onConfigData()
+            .subscribe(() => this.troggleTOC());
         this.broadcast.onChapterIndexChange()
             .subscribe((data: number) => this.setChapterIndex(data))
     }
@@ -43,7 +45,6 @@ export class TocComponent implements OnInit {
         this.broadcast.chapterIndexChange(index);
     }
     public setChapterIndex(index: number) {
-        this.chapters = this.state.blogConfig.chapters;
         const lastChapter = this.state.getLastChapter();
         if (index <= lastChapter.number) {
             this.currentIndex = index;
@@ -52,16 +53,17 @@ export class TocComponent implements OnInit {
         }
     }
     public troggleTOC(): void {
+        this.chapters = this.state.blogConfig.chapters;
         if (this.troggle === TocState.HIDDEN) {
-            this.showTOC = true;
-            this.troggle = TocState.DESCENDING;
-        } else if (this.troggle === TocState.SHOWN) {
             this.showTOC = false;
+            this.troggle = TocState.DESCENDING;
+        } else if (this.troggle === TocState.ASCENDING) {
+            this.showTOC = true;
             this.troggle = TocState.HIDDEN;
         } else if (this.troggle === TocState.DESCENDING) {
-            this.chapters = this.chapters.reverse();
+            this.chapters.reverse();
             this.showTOC = true;
-            this.troggle = TocState.SHOWN;
+            this.troggle = TocState.ASCENDING;
         }
     }
     public isSelectedClass(index: number) {
