@@ -33,11 +33,8 @@ export class TocComponent implements OnInit {
     }
     public ngOnInit() {
         this.registerBroadcast();
-        this.currentIndex = 1;
     }
     public registerBroadcast() {
-        this.broadcast.onConfigData()
-            .subscribe((data: IBlogConfig) => this.loadTOCData(data));
         this.broadcast.onChapterIndexChange()
             .subscribe((data: number) => this.setChapterIndex(data))
     }
@@ -46,9 +43,12 @@ export class TocComponent implements OnInit {
         this.broadcast.chapterIndexChange(index);
     }
     public setChapterIndex(index: number) {
+        this.chapters = this.state.blogConfig.chapters;
         const lastChapter = this.state.getLastChapter();
         if (index <= lastChapter.number) {
             this.currentIndex = index;
+        } else {
+            this.currentIndex = lastChapter.number;
         }
     }
     public troggleTOC(): void {
@@ -70,8 +70,5 @@ export class TocComponent implements OnInit {
         } else {
             return this.constants.UNSELECTED_CHAPTER_STYLE;
         }
-    }
-    private loadTOCData(data: IBlogConfig) {
-        this.chapters = data.chapters;
     }
 }
