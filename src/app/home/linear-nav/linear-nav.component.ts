@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StateService } from '../../service/state.service';
 import { BroadcastService } from '../../service/broadcast.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
@@ -11,14 +12,12 @@ import { IChapter } from '../../model/IChapter';
 })
 export class LinearNavComponent implements OnInit {
 
-    private state: StateService;
-    private broadcast: BroadcastService;
     public isFirstChapter: boolean;
     public isLastChapter: boolean;
 
-    constructor(state: StateService, broadcast: BroadcastService) {
-        this.state = state;
-        this.broadcast = broadcast;
+    constructor(private state: StateService,
+                private broadcast: BroadcastService,
+                private router: Router) {
         this.isFirstChapter = false;
         this.isLastChapter = false;
     }
@@ -33,18 +32,22 @@ export class LinearNavComponent implements OnInit {
             .subscribe((data: number) => this.setChapterState(data));
     }
     public gotoFirstChapter() {
+        this.router.navigate([`/book/1`]);
         this.broadcast.chapterIndexChange(1);
     }
     public gotoLastChapter() {
         const lastChapter = this.state.getLastChapter();
+        this.router.navigate([`/book/${lastChapter.number}`]);
         this.broadcast.chapterIndexChange(lastChapter.number);
     }
     public gotoNextChapter() {
         const num = this.state.currentChapter + 1;
+        this.router.navigate([`/book/${num}`]);
         this.broadcast.chapterIndexChange(num);
     }
     public gotoPreviousChapter() {
         const num = this.state.currentChapter - 1;
+        this.router.navigate([`/book/${num}`]);
         this.broadcast.chapterIndexChange(num);
     }
     private setChapterState(idx: number) {

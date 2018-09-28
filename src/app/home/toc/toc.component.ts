@@ -58,6 +58,7 @@ export class TocComponent implements OnInit {
             this.showTOC = false;
             this.troggle = TocState.DESCENDING;
         } else if (this.troggle === TocState.ASCENDING) {
+            this.chapters.reverse();
             this.showTOC = true;
             this.troggle = TocState.HIDDEN;
         } else if (this.troggle === TocState.DESCENDING) {

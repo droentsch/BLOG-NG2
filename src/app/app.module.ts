@@ -16,6 +16,7 @@ const APP_ROUTES: Routes = [
     { path: 'book/:id', component: BodyComponent },
     { path: '', redirectTo: 'book/1', pathMatch: 'full' },
     { path: 'book', redirectTo: 'book/1', pathMatch: 'full' },
+    { path: '**', redirectTo: 'book/1', pathMatch: 'full' },
 ];
 
 @NgModule({
