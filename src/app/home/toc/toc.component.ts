@@ -30,9 +30,9 @@ export class TocComponent implements OnInit {
         this.tocTitle = this.constants.TOC_TITLE;
         this.showTOC = false;
         this.troggle = TocState.DESCENDING;
+        this.registerBroadcast();
     }
     public ngOnInit() {
-        this.registerBroadcast();
     }
     public registerBroadcast() {
         this.broadcast.onConfigData()

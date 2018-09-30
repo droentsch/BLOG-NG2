@@ -58,13 +58,13 @@ export class BodyComponent implements OnInit {
         if (end.url !== '/') {
             chapter = parseInt(end.url.split('/').pop(), 10);
         }
-        console.log(`Chapter in BodyComponent = ${chapter}`);
         this.state.currentChapter = chapter;
         if (!this.state.blogConfig) {
             this.configService.getConfig()
                 .subscribe((data: IBlogConfig) => {
                     this.handleConfig(data);
-                    this.getChapter(chapter);
+                    this.broadcast.chapterIndexChange(chapter);
+                    // this.getChapter(chapter);
                 }
                     ,
                     (err) => this.handleConfigError(err));
