@@ -14,9 +14,9 @@ import { BodyComponent } from './home/body/body.component';
 
 const APP_ROUTES: Routes = [
     { path: 'book/:id', component: BodyComponent },
-    { path: '', redirectTo: 'book/1', pathMatch: 'full' },
-    { path: 'book', redirectTo: 'book/1', pathMatch: 'full' },
-    { path: '**', redirectTo: 'book/1', pathMatch: 'full' },
+    { path: '', redirectTo: 'book/', pathMatch: 'full' },
+    { path: 'book', redirectTo: 'book/', pathMatch: 'full' },
+    { path: '**', redirectTo: 'book/', pathMatch: 'full' },
 ];
 
 @NgModule({
