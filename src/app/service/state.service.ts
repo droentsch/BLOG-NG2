@@ -7,12 +7,19 @@ import { IChapter } from '../model/IChapter';
 export class StateService {
     private _blogConfig: IBlogConfig;
     private _currentChapter: number;
+    private _routesSubscribed: boolean;
 
     public set blogConfig(config: IBlogConfig) {
         this._blogConfig = config;
-        this._currentChapter = 1;
+        this._routesSubscribed = false;
     }
 
+    public get routesSubscribed(): boolean {
+        return this._routesSubscribed;
+    }
+    public set routesSubscribed(val: boolean) {
+        this._routesSubscribed = val;
+    }
     public get blogConfig(): IBlogConfig {
         return this._blogConfig;
     }
@@ -37,5 +44,9 @@ export class StateService {
             }
         });
         return highVal;
+    }
+    public clone<T>(obj: T): T {
+        let Tstring = JSON.stringify(obj);
+        return (JSON.parse(Tstring));
     }
 }

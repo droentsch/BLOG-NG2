@@ -7,6 +7,7 @@ const PORT = 4452;
 export class Application {
     public app: express.Application;
     private server: http.Server;
+    private staticPath: string;
 
     constructor() {
         this.app = express();
@@ -25,6 +26,7 @@ export class Application {
     }
     private setRouting(): void {
         this.setMiddleware();
+        this.setDefault();
     }
     private setServer(): void {
         this.server.listen(PORT, () => {
@@ -32,9 +34,14 @@ export class Application {
         });
     }
     private setMiddleware(): void {
-        const staticPath = path.join(__dirname, './prod');
-        this.app.use('/', express.static(staticPath));
-        console.log(`looking for path ${staticPath}`);
+        this.staticPath = path.join(__dirname, './prod');
+        this.app.use('/', express.static(this.staticPath));
+        console.log(`looking for path ${this.staticPath}`);
+    }
+    private setDefault() {
+        this.app.get('/', (req, res) => {
+            res.sendFile(`${this.staticPath}/default.html`);
+        });
     }
 }
 

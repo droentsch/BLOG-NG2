@@ -29,15 +29,14 @@ export class TocComponent implements OnInit {
         this.tocHeader = this.constants.TOC_HEADER;
         this.tocTitle = this.constants.TOC_TITLE;
         this.showTOC = false;
-        this.troggle = TocState.HIDDEN;
+        this.troggle = TocState.DESCENDING;
+        this.registerBroadcast();
     }
     public ngOnInit() {
-        this.registerBroadcast();
-        this.currentIndex = 1;
     }
     public registerBroadcast() {
         this.broadcast.onConfigData()
-            .subscribe((data: IBlogConfig) => this.loadTOCData(data));
+            .subscribe(() => this.troggleTOC());
         this.broadcast.onChapterIndexChange()
             .subscribe((data: number) => this.setChapterIndex(data))
     }
@@ -49,19 +48,23 @@ export class TocComponent implements OnInit {
         const lastChapter = this.state.getLastChapter();
         if (index <= lastChapter.number) {
             this.currentIndex = index;
+        } else {
+            this.currentIndex = lastChapter.number;
         }
     }
     public troggleTOC(): void {
+        this.chapters = this.state.blogConfig.chapters;
         if (this.troggle === TocState.HIDDEN) {
-            this.showTOC = true;
-            this.troggle = TocState.SHOWN;
-        } else if (this.troggle === TocState.SHOWN) {
-            this.chapters = this.chapters.reverse();
-            this.troggle = TocState.DESCENDING;
-        } else if (this.troggle === TocState.DESCENDING) {
-            this.chapters = this.chapters.reverse();
             this.showTOC = false;
+            this.troggle = TocState.DESCENDING;
+        } else if (this.troggle === TocState.ASCENDING) {
+            this.chapters.reverse();
+            this.showTOC = true;
             this.troggle = TocState.HIDDEN;
+        } else if (this.troggle === TocState.DESCENDING) {
+            this.chapters.reverse();
+            this.showTOC = true;
+            this.troggle = TocState.ASCENDING;
         }
     }
     public isSelectedClass(index: number) {
@@ -70,8 +73,5 @@ export class TocComponent implements OnInit {
         } else {
             return this.constants.UNSELECTED_CHAPTER_STYLE;
         }
-    }
-    private loadTOCData(data: IBlogConfig) {
-        this.chapters = data.chapters;
     }
 }

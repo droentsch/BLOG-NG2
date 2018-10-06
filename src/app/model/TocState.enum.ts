@@ -1,5 +1,5 @@
 export enum TocState {
     HIDDEN,
-    SHOWN,
+    ASCENDING,
     DESCENDING
 }
