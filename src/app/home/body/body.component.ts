@@ -55,14 +55,14 @@ export class BodyComponent implements OnInit {
 
     private handleRoute(end: NavigationEnd): void {
         let chapter: number;
+        if (end.url !== '/') {
+            chapter = parseInt(end.url.split('/').pop(), 10);
+        }
         if (!this.state.blogConfig) {
             this.configService.getConfig()
                 .subscribe((data: IBlogConfig) => {
                     this.handleConfig(data);
                     chapter = this.state.getLastChapter().number;
-                    if (end.url !== '/') {
-                        chapter = parseInt(end.url.split('/').pop(), 10);
-                    }
                     this.state.currentChapter = chapter;
                     this.broadcast.chapterIndexChange(chapter);
                 }
