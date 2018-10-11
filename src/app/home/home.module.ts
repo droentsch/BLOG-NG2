@@ -14,6 +14,7 @@ import { ContentService } from '../service/content.service';
 import { LinearNavComponent } from './linear-nav/linear-nav.component';
 import { TocComponent } from './toc/toc.component';
 import { ConstantsService } from '../service/constants.service';
+import { AudioPlayerComponent } from './audio-player/audio-player.component';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { ConstantsService } from '../service/constants.service';
         RouterModule,
     ],
     declarations: [
+        AudioPlayerComponent,
         HomeComponent,
         HeaderComponent,
         BodyComponent,

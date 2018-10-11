@@ -4,4 +4,5 @@ export interface IChapter {
     pubDate: string;
     contentToken: string;
     number: number;
+    audioFeeds?: string[];
 }

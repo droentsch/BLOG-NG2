@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <audio controls="controls">
+      <source *ngFor="let feed of feeds" src="{{ feed }}" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  <div class="col-md-4"></div>
+</div>

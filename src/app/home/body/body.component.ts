@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './body.component.html',
 })
 export class BodyComponent implements OnInit {
+    public feeds: string[];
     public chapter: string;
     private broadcast: BroadcastService;
 
@@ -26,6 +27,7 @@ export class BodyComponent implements OnInit {
                 this.handleRoute(event);
             }
         });
+        this.feeds = [];
     }
     public ngOnInit() {
         this.registerBroadcasts();
@@ -42,6 +44,7 @@ export class BodyComponent implements OnInit {
     }
 
     private handleChapter(data: IChapter) {
+        this.feeds = data.audioFeeds;
         this.contentService.getChapter(data.contentToken)
             .subscribe((chap: string) => this.gimmeChapter(chap),
                 (error: string) => this.handleError(error));
