@@ -55,15 +55,16 @@ export class BodyComponent implements OnInit {
     private handleError(error: string) {
         console.log(`ERROR: ${error}`);
     }
-
     private handleRoute(end: NavigationEnd): void {
         let chapter: number;
         if (!this.state.blogConfig) {
             this.configService.getConfig()
                 .subscribe((data: IBlogConfig) => {
                     this.handleConfig(data);
-                    chapter = this.state.getLastChapter().number;
-                    if (end.url !== '/') {
+                    if (end.url === '/' || end.url === '/book') {
+                        chapter = this.state.getLastChapter().number;
+                        this.router.navigate([`/book/${chapter}`]);
+                    } else {
                         chapter = parseInt(end.url.split('/').pop(), 10);
                     }
                     this.state.currentChapter = chapter;
@@ -71,8 +72,6 @@ export class BodyComponent implements OnInit {
                 }
                     ,
                     (err) => this.handleConfigError(err));
-        } else {
-            this.getChapter(chapter);
         }
     }
     private handleConfig(data: IBlogConfig): void {
