@@ -13,7 +13,7 @@ import { StateService } from './service/state.service';
 import { BodyComponent } from './home/body/body.component';
 
 const APP_ROUTES: Routes = [
-    { path: 'book/:id', component: BodyComponent },
+    { path: 'book/:id', component: HomeComponent },
     { path: '', redirectTo: 'book/', pathMatch: 'full' },
     { path: 'book', redirectTo: 'book/', pathMatch: 'full' },
     { path: '**', redirectTo: 'book/', pathMatch: 'full' },
