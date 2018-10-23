@@ -7,6 +7,7 @@ import { ContentService } from '../../service/content.service';
 import { StateService } from '../../service/state.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
 import { Title } from '@angular/platform-browser';
+import { IAudioFeed } from '../../model/IAudioFeed';
 
 @Component({
     selector: 'blog-body',
@@ -14,7 +15,7 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './body.component.html',
 })
 export class BodyComponent implements OnInit {
-    public feeds: string[];
+    public feeds: IAudioFeed[];
     public chapter: string;
     private broadcast: BroadcastService;
 
