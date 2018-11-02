@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IAudioFeed } from '../../model/IAudioFeed';
 
 @Component({
     selector: 'audio-player',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./audio-player.component.css'],
 })
 export class AudioPlayerComponent {
-    @Input() feeds: string[];
+    @Input() feeds: IAudioFeed[];
 }

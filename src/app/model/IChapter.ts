@@ -1,4 +1,4 @@
-import { IAudioFeed } from "./IAudioFeed";
+import { IAudioFeed } from './IAudioFeed';
 
 export interface IChapter {
     chapterName: string;
