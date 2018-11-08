@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { BroadcastService } from '../../service/broadcast.service';
 import { IChapter } from '../../model/IChapter';
@@ -6,7 +7,6 @@ import { ConfigService } from '../../service/config.service';
 import { ContentService } from '../../service/content.service';
 import { StateService } from '../../service/state.service';
 import { IBlogConfig } from '../../model/IBlogConfig';
-import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'blog-body',
@@ -14,12 +14,13 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './body.component.html',
 })
 export class BodyComponent implements OnInit {
-    public chapter: string;
+    public chapter: SafeHtml;
     private broadcast: BroadcastService;
 
     constructor(broadcast: BroadcastService, private configService: ConfigService,
         private contentService: ContentService, private state: StateService,
-        private router: Router, private title: Title) {
+        private router: Router, private title: Title,
+        private sanitizer: DomSanitizer) {
         this.broadcast = broadcast;
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
@@ -47,7 +48,7 @@ export class BodyComponent implements OnInit {
                 (error: string) => this.handleError(error));
     }
     private gimmeChapter(chapter: string) {
-        this.chapter = chapter;
+        this.chapter = this.sanitizer.bypassSecurityTrustHtml(chapter);
     }
     private handleError(error: string) {
         console.log(`ERROR: ${error}`);

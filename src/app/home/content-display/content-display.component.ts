@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 @Component({
     selector: 'content-display',
     inputs: ['content'],
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./content-display.component.css']
 })
 export class ContentDisplayComponent {
-    public content: string;
+    public content: SafeHtml;
 
     constructor() {
 
