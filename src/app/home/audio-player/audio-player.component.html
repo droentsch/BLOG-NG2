@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <audio controls="controls">
+    <audio controls>
       <source *ngFor="let feed of feeds" src="{{ feed.path }}" type=" {{ feed.mimeType }} " />
       Your browser does not support the audio element.
     </audio>
