@@ -11,9 +11,12 @@ import 'rxjs/Rx'
 import { ConfigService } from './service/config.service';
 import { StateService } from './service/state.service';
 import { BodyComponent } from './home/body/body.component';
+import { BookRouteGuard } from './service/guards/book-routeguard/book-route.guard';
 
 const APP_ROUTES: Routes = [
-    { path: 'book/:id', component: HomeComponent },
+    { path: 'book/:id',
+    canActivate: [BookRouteGuard],
+    component: HomeComponent },
     { path: '', redirectTo: 'book/', pathMatch: 'full' },
     { path: 'book', redirectTo: 'book/', pathMatch: 'full' },
     { path: '**', redirectTo: 'book/', pathMatch: 'full' },
