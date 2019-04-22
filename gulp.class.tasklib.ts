@@ -1,4 +1,4 @@
-let Builder = require('systemjs-builder');
+
 import * as del from 'del';
 import * as yargs from 'yargs';
 
@@ -10,23 +10,7 @@ export default class TaskLib {
         this.LIB = [
         'node_modules/core-js/client/shim.min.js',
         'node_modules/zone.js/dist/zone.js',
-        'node_modules/reflect-metadata/Reflect.js',
-        'node_modules/systemjs/dist/system.src.js'];
-    }
-    public bundler(isMinified: boolean, app: string) {
-        let options = {
-            format: 'cjs',
-            minify: isMinified,
-            mangle: false
-        };
-        let builder = new Builder('.', 'src/systemjs.config.js');
-        return builder.buildStatic('main', 'dist/prod/js/app.js', options)
-            .then(() => {
-                return del(app);
-            })
-            .catch((err: any) => {
-                console.log(`Error building system files: ${err}`);
-            });
+        'node_modules/reflect-metadata/Reflect.js'];
     }
     public hasTag(): boolean {
         return (yargs.argv && yargs.argv.tag && yargs.argv.tag.length && yargs.argv.tag.length > 0);

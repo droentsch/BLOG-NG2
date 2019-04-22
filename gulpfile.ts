@@ -1,13 +1,12 @@
+import * as webpackStream from 'webpack-stream';
 import * as gulp from 'gulp';
 import * as ts from 'gulp-typescript';
 import * as runSequence from 'run-sequence';
-import * as flatten from 'gulp-flatten';
 import * as concat from 'gulp-concat';
 import * as replace from 'gulp-replace';
 import * as del from 'del';
 import * as path from 'path';
 import * as inject from 'gulp-inject';
-import * as gutil from 'gulp-util';
 import tslint from 'gulp-tslint';
 import TaskLib from './gulp.class.tasklib';
 let inline = require('gulp-inline-ng2-template');
@@ -26,7 +25,8 @@ const DEST = {
     IMG: './dist/prod/assets/img',
     FONT: './dist/prod/assets/css/fonts',
     CONTENT: './dist/prod/content',
-    CONFIG: './dist/prod/config'
+    CONFIG: './dist/prod/config',
+    JS: './dist/prod/js',
 };
 const COVERAGE = './coverage';
 const TARGET = DEST.PROD; // default
@@ -71,6 +71,20 @@ let cleanup = function (targets: string[]) {
             console.log(`Error deleting targets: ${reason}`)
         });
 };
+function async bundledApp(min: boolean) {
+    return await gulp.src(path.join(__dirname, 'dist', 'app', 'main.js'))
+      .pipe(webpackStream({
+        mode: min === true ? 'production' : 'development',
+        devtool: min === false ? 'inline-source-map' : 'source-map',
+        output: {
+          filename: 'app.js',
+        },
+        resolve: {
+          extensions: ['.js'],
+        },
+      }))
+      .pipe(gulp.dest(path.join(__dirname, DEST.JS)));
+  };
 
 gulp.task('copy.js', () => {
     return gulp.src(lib.LIB)
@@ -156,20 +170,16 @@ gulp.task('delete.coverage', (done: any) => {
     return cleanup([COVERAGE]);
 });
 
-gulp.task('bundle.js', () => {
-    return lib.bundler(false, APP);
-});
-
-gulp.task('bundle.js.min', () => {
-    return lib.bundler(true, APP);
-});
-
 gulp.task('karma.jasmine', (done: () => void) => {
     return KarmaServer.start({
         configFile: path.join(__dirname, 'karma.conf.js')
     }, () => {
         done();
     });
+});
+
+gulp.task('bundle.js', () => {
+
 });
 
 gulp.task('dev.build', () => {

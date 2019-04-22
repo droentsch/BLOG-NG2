@@ -61,6 +61,7 @@
     "@types/node": "^6.0.90",
     "@types/run-sequence": "0.0.29",
     "@types/systemjs": "0.20.2",
+    "@types/webpack-stream": "^3.2.10",
     "@types/yargs": "8.0.1",
     "babel-cli": "^6.16.0",
     "babel-preset-angular2": "^0.0.2",
@@ -106,6 +107,7 @@
     "ts-node": "3.1.0",
     "tslint": "^5.7.0",
     "typescript": "^3.2.2",
+    "webpack-stream": "^5.2.1",
     "yargs": "8.0.2"
   },
   "repository": {}
